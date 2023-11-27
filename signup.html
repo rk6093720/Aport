@@ -169,7 +169,7 @@
               </div>
               <div class="col-xl-6">
                 <div class="contact-form__input-box">
-                <input class="adharCard" type="text" placeholder="adharCard" name="email" maxlength="12" required>
+                <input class="adharCard" type="text" placeholder="adharCard" name="adharCard" maxlength="12" required>
                 </div>
               </div>
             </div>
@@ -402,7 +402,7 @@
 <script>
 
   document.querySelector("form").addEventListener("submit", formSubmit);
-  var userData = JSON.parse(localStorage.getItem("usersData")) || [];
+ // var userData = JSON.parse(localStorage.getItem("usersData")) || [];
   function formSubmit(e) {
     e.preventDefault();
     var firstName = document.querySelector(".firstName").value;
@@ -427,19 +427,18 @@
       city,
       postalCode
     }
-    userData.push(signupData)
     axios.post("http://localhost:8080/users/signup", signupData, {
       headers: {
         'Content-Type': 'application/json'
       }
     })
       .then((res) => {
-        //console.log(res.data);
+        console.log(res);
         if(res.data.status === "userExists"){
-          showToast("userExists");
+          showToast(res.data.status);
         }
         if(res.data.msg === "signup successful!"){
-            showToast("Signup Success");
+            showToast(res.data.msg);
             setTimeout(()=>{
               window.location.href = "./login.html"
             },2000)
@@ -449,27 +448,33 @@
         console.log(e);
         if(res.data.error === "signup failed" )
         {
-          showToast("signup failed")
+          showToast(res.data.error)
         }
       })
   }
      function showToast(message) {
-       //  alert(message)
-       if(message === "userExists" || message === "signup failed"){
-        var toastElement = document.getElementById("toast");
-        toastElement.innerText = message;
-        toastElement.classList.add("show");
-        setTimeout(function () {
-          toastElement.classList.remove("show");
-        }, 3000); // Hide the toast after 3 seconds
-      }else{
-        var toastElement = document.getElementById("signup");
-         toastElement.innerText = message;
-         toastElement.classList.add("show");
-         setTimeout(function () {
-           toastElement.classList.remove("show");
-         }, 3000);
-      }
-      
-      }
+        console.log(message === "userExists");
+       if (message === "userExists" || message === "signup failed") {
+         var toastElement = document.querySelector(".toast");
+         if (toastElement) {
+           toastElement.innerText = message;
+           toastElement.classList.add("show");
+           setTimeout(function () {
+             toastElement.classList.remove("show");
+           }, 3000); // Hide the toast after 3 seconds
+         }
+       }
+       if (message === "ok") {
+         var loginElement = document.querySelector(".signup");
+         if (loginElement) {
+           loginElement.innerText = message;
+           loginElement.classList.add("showsignup");
+           setTimeout(function () {
+             loginElement.classList.remove("showsignup");
+           }, 3000);
+         }
+       }
+     }
+       
+
 </script>

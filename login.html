@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>signup</title>
+    <title>LOGIN</title>
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicons/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicons/favicon-16x16.png" />
@@ -46,242 +46,7 @@
     <link rel="stylesheet" href="assets/css/aports-responsive.css" />
     <!-- Include Axios from CDN in your HTML file -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
-<style>
-    body,
-    html {
-        margin: 0;
-        height: 100vh;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    * {
-        box-sizing: border-box;
-    }
-    .imgandcontainer{
-         display: flex;
-         border: 1px solid black;
-         width: 50%;
-         height:500px ;
-         margin: auto;
-         position: relative;
-    }
-    .bg-img {
-        width: 40%;
-        border: 1px solid blue;
-        background-color: blue;
-    }
-    .bg-img img{
-        width: 100%;
-        height: 50%;
-        margin-top:79%;
-        border-radius: 5px;
-    
-    }
-    .heading {
-        position: absolute;
-        left: 5%;
-        top: 12%;
-        font-size: 25px;
-        font-family: Arial, Helvetica, sans-serif;
-        font-weight: bold;
-        color: white;
-        
-
-    }
-    
-
-    /* Add styles to the form container */
-    #container {
-        border: 1px solid black;
-        width:60%;
-        background-color: white;
-    }
-    p{
-        text-align: center;
-        margin-top: 10px;
-          font-size: 25px;
-          color: black;
-    }
-    /* Full-width input fields */
-    input[type=text],
-    input[type=password] {
-        width: 100%;
-        padding: 15px;
-        margin: 2px 0 18px 0;
-        border: none;
-        background: #f1f1f1;
-        font-size: 25px;
-    }
-
-    input[type=text]:focus,
-    input[type=password]:focus {
-        background-color: #ddd;
-        outline: none;
-
-    }
-
-    /* Set a style for the submit button */
-    .btn {
-        background-color: #04AA6D;
-        color: white;
-        padding: 16px 20px;
-        border: none;
-        cursor: pointer;
-        width: 100%;
-        opacity: 0.9;
-    }
-
-    .btn:hover {
-        opacity: 1;
-    }
-
-    /* Extra styles for the cancel button */
-
-    .loginbtn {
-        padding: 14px 20px;
-        background-color: green;
-        color: #fff;
-        font-size: 25px;
-    }
-
-    /* Float cancel and signup buttons and add an equal width */
-    .loginbtn {
-        float: left;
-        width: 100%;
-        font-size: 25px;
-    }
-    .googlebtn{
-        width: 100%;
-          float: left;
-        font-size: 25px;
-        padding:14px 20px ;
-        background-color: white;
-        color: rgb(234, 23, 23);
-    }
-    .googlebtn:hover{
-        background-color:#04AA6D;
-    }
-    /* Add padding to container elements */
-    #container {
-        padding: 16px;
-    }
-
-    /* Clear floats */
-    .clearfix::after {
-        content: "";
-        clear: both;
-        display: table;
-    }
-   .clearfixgooglebtn::after{
-       content: "";
-        clear: both;
-        display: table;
-   }
-    .toast {
-        visibility: hidden;
-        position: fixed;
-        top: 5px;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: red;
-        color: #fff;
-        text-align: center;
-        padding: 16px;
-        border-radius: 8px;
-        font-size: 18px;
-        opacity: 0;
-        transition: opacity 0.3s, visibility 0s linear 0.3s;
-        z-index: 1000;
-    }
-
-    .toast.show {
-        visibility: visible;
-        opacity: 1;
-        animation: slideIn 0.5s, slideOut 0.5s 2.5s;
-    }
-
-    .signup {
-        visibility: hidden;
-        position: fixed;
-        top: 5px;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: green;
-        color: #fff;
-        text-align: center;
-        padding: 16px;
-        border-radius: 8px;
-        font-size: 18px;
-        opacity: 0;
-        transition: opacity 0.3s, visibility 0s linear 0.3s;
-        z-index: 1000;
-    }
-
-    .signup.show {
-        visibility: visible;
-        opacity: 1;
-        animation: slideIn 0.5s, slideOut 0.5s 2.5s;
-    }
-
-
-    @keyframes slideIn {
-        from {
-            transform: translateY(-50%);
-        }
-
-        to {
-            transform: translateX(-50%);
-        }
-    }
-
-    @keyframes slideOut {
-        from {
-            transform: translateX(-50%);
-        }
-
-        to {
-            transform: translateY(-50%);
-        }
-    }
-
-    /* Change styles for cancel button and signup button on extra small screens */
-    @media only screen and (min-width: 0px) and (max-width:425px) {
-        .loginbtn {
-            width: 100%;
-            font-size: 5vw;
-        }
-
-        h1 {
-            border: 1px solid lightblue;
-            width: 100%;
-            font-size: 15px;
-        }
-
-        body,
-        html {
-            margin: 0;
-            height: 100vh;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        #container {
-            width: 50%;
-        }
-
-        #container label {
-            font-size: 5vw;
-        }
-
-
-    }
-</style>
-
-<body class="custom-cursor">
+</head><body class="custom-cursor">
 
     <div class="custom-cursor__cursor"></div>
     <div class="custom-cursor__cursor-two"></div>
@@ -378,7 +143,7 @@
         </div><!-- /.stricky-header -->
 
         <div class="toast" id="toast"></div>
-        <div class="signup" id="signup"></div>
+        <div class="login" id="login"></div>
             <!-- section of login  -->
             <section class="contact-three">
                 <div class="container">
@@ -592,58 +357,60 @@
 
 </html>
 <script>
-
-    document.querySelector("form").addEventListener("submit", login);
-    var userData = JSON.parse(localStorage.getItem("usersData"));
-    function login(e) {
-        e.preventDefault();
-        var email = document.querySelector(".email").value;
-        var password = document.querySelector(".password").value;
-        const payload={
-            email,
-            password
+       document.querySelector("form").addEventListener("submit", login);
+        //var userData = JSON.parse(localStorage.getItem("usersData")) || {};
+        function login(e) {
+            e.preventDefault();
+            var email = document.querySelector(".email").value;
+            var password = document.querySelector(".password").value;
+            var payload = {
+                email,
+                password
+            };
+            axios.post("http://localhost:8080/users/login", payload, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then((res) => {
+                    console.log(res.data.error)
+                    if (res.data.error === "InvAlid Password") {
+                        showToast(res.data.error);
+                    }
+                    if (res.data.status === "ok") {
+                        showToast(res.data.status);
+                        setTimeout(() => {
+                            alert(res.data.data);
+                            // login success hua toh username navbar pe dikhna hai aur logout ka button
+                        }, 3000);
+                    }
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
         }
-        axios.post("http://localhost:8080/users/signup", payload, {
-            headers: {
-                'Content-Type': 'application/json'
+
+        function showToast(message) {
+            console.log(message);
+            if (message === "InvAlid Password" || message === "login failed") {
+                var toastElement = document.querySelector(".toast");
+                if (toastElement) {
+                    toastElement.innerText = message;
+                    toastElement.classList.add("show");
+                    setTimeout(function () {
+                        toastElement.classList.remove("show");
+                    }, 3000); // Hide the toast after 3 seconds
+                }
             }
-        })
-            .then((res) => {
-                //console.log(res.data);
-                if (res.data.status === "userExists") {
-                    showToast("userExists");
+            if (message === "ok") {
+                var loginElement = document.querySelector(".login");
+                if (loginElement) {
+                    loginElement.innerText = message;
+                    loginElement.classList.add("showlogin");
+                    setTimeout(function () {
+                        loginElement.classList.remove("showlogin");
+                    }, 3000);
                 }
-                if (res.data.msg === "signup successful!") {
-                    showToast("Signup Success");
-                    setTimeout(() => {
-                        window.location.href = "./login.html"
-                    }, 2000)
-                }
-            })
-            .catch((e) => {
-                console.log(e);
-                if (res.data.error === "signup failed") {
-                    showToast("signup failed")
-                }
-            })
-    }
-    function showToast(message) {
-        //  alert(message)
-        if (message === "userExists" || message === "signup failed") {
-            var toastElement = document.getElementById("toast");
-            toastElement.innerText = message;
-            toastElement.classList.add("show");
-            setTimeout(function () {
-                toastElement.classList.remove("show");
-            }, 3000); // Hide the toast after 3 seconds
-        } else {
-            var toastElement = document.getElementById("signup");
-            toastElement.innerText = message;
-            toastElement.classList.add("show");
-            setTimeout(function () {
-                toastElement.classList.remove("show");
-            }, 3000);
+            }
         }
-
-    }
 </script>

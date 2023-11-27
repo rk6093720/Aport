@@ -7268,7 +7268,90 @@ flex: 0 0 auto;
   margin-bottom: 0px;
   font-weight: 400;
 }
+.toast {
+  visibility: hidden;
+  position: fixed;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: red;
+  color: #fff;
+  text-align: center;
+  padding: 16px;
+  border-radius: 8px;
+  font-size: 18px;
+  opacity: 0;
+  transition: opacity 0.3s, visibility 0s linear 0.3s;
+  z-index: 1000;
+}
+.signup {
+  visibility: hidden;
+  position: fixed;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: green;
+  color: #fff;
+  text-align: center;
+  padding: 16px;
+  border-radius: 8px;
+  font-size: 18px;
+  opacity: 0;
+  transition: opacity 0.3s, visibility 0s linear 0.3s;
+  z-index: 1000;
+}
 
+.login {
+  visibility: hidden;
+  position: fixed;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: green;
+  color: #fff;
+  text-align: center;
+  padding: 16px;
+  border-radius: 8px;
+  font-size: 18px;
+  opacity: 0;
+  transition: opacity 0.3s, visibility 0s linear 0.3s;
+  z-index: 1000;
+}
+.toast.show {
+  visibility: visible;
+  opacity: 1;
+  animation: slideIn 0.5s, slideOut 0.5s 2.5s;
+}
+.signup .showsignup {
+  visibility: visible;
+  opacity: 1;
+  animation: slideIn 0.5s, slideOut 0.5s 2.5s;
+}
+.login .showlogin {
+  visibility: visible;
+  opacity: 1;
+  animation: slideIn 0.5s, slideOut 0.5s 2.5s;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-50%);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateY(-50%);
+  }
+}
 .contact-form__btn {
   border: none;
 }
