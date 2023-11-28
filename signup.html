@@ -135,9 +135,9 @@
     <div class="stricky-header stricked-menu main-menu main-menu-two">
       <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
     </div><!-- /.stricky-header -->
-
-<div class="toast" id="toast"></div>
-<div class="signup" id="signup"></div>
+    <div class="userexist"></div>
+    <div class="signup"></div>
+    <div class="failed"></div>
   <!-- signup implementation start from here  -->
   <section class="contact-three">
     <div class="container">
@@ -402,7 +402,7 @@
 <script>
 
   document.querySelector("form").addEventListener("submit", formSubmit);
- // var userData = JSON.parse(localStorage.getItem("usersData")) || [];
+  var userData = JSON.parse(localStorage.getItem("usersData")) || [];
   function formSubmit(e) {
     e.preventDefault();
     var firstName = document.querySelector(".firstName").value;
@@ -427,54 +427,32 @@
       city,
       postalCode
     }
+    userData.push(signupData);
+    localStorage.setItem("usersData",JSON.stringify(userData))
     axios.post("http://localhost:8080/users/signup", signupData, {
       headers: {
         'Content-Type': 'application/json'
       }
     })
-      .then((res) => {
-        console.log(res);
-        if(res.data.status === "userExists"){
-          showToast(res.data.status);
-        }
-        if(res.data.msg === "signup successful!"){
-            showToast(res.data.msg);
+    .then((res)=>{
+      console.log(res)
+          if(res.data.status === "userExists" ){
+            alert("userExists")
+          }
+          else if(res.data.status === "ok"){
+            alert("Signup Successful")
             setTimeout(()=>{
-              window.location.href = "./login.html"
+                 window.location.href="./login.html"
             },2000)
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-        if(res.data.error === "signup failed" )
-        {
-          showToast(res.data.error)
-        }
-      })
+          }
+    })
+    .catch((e)=>{
+            console.log(e);
+            if (res.data.error === "signup failed") {
+              alert("error")
+            }
+    })
   }
-     function showToast(message) {
-        console.log(message === "userExists");
-       if (message === "userExists" || message === "signup failed") {
-         var toastElement = document.querySelector(".toast");
-         if (toastElement) {
-           toastElement.innerText = message;
-           toastElement.classList.add("show");
-           setTimeout(function () {
-             toastElement.classList.remove("show");
-           }, 3000); // Hide the toast after 3 seconds
-         }
-       }
-       if (message === "ok") {
-         var loginElement = document.querySelector(".signup");
-         if (loginElement) {
-           loginElement.innerText = message;
-           loginElement.classList.add("showsignup");
-           setTimeout(function () {
-             loginElement.classList.remove("showsignup");
-           }, 3000);
-         }
-       }
-     }
-       
+
 
 </script>

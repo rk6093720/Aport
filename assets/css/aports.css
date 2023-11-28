@@ -64,6 +64,7 @@ a:hover,
 a:focus,
 a:visited {
   text-decoration: none;
+  color: black;
 }
 
 ::-webkit-input-placeholder {
@@ -681,6 +682,7 @@ ul {
   -ms-flex-align: center;
   align-items: center;
   display: none;
+  color: black;
 }
 
 
@@ -696,6 +698,7 @@ ul {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    color: black;
   }
 }
 
@@ -1309,6 +1312,7 @@ ul {
 .main-menu-two__main-menu-box {
   position: relative;
   display: block;
+  
 }
 
 .main-menu-two__right {
@@ -7176,7 +7180,7 @@ ul {
   position: relative;
   display: block;
   overflow: hidden;
-  margin-top: -60px;
+  margin-top: 8%;
   padding: 0 0 120px;
   z-index: 1;
 }
@@ -7268,7 +7272,7 @@ flex: 0 0 auto;
   margin-bottom: 0px;
   font-weight: 400;
 }
-.toast {
+.userexist {
   visibility: hidden;
   position: fixed;
   top: 0px;
@@ -7281,7 +7285,7 @@ flex: 0 0 auto;
   border-radius: 8px;
   font-size: 18px;
   opacity: 0;
-  transition: opacity 0.3s, visibility 0s linear 0.3s;
+  transition: opacity 0.3s, visibility 0s linear 0.3s ;
   z-index: 1000;
 }
 .signup {
@@ -7297,10 +7301,40 @@ flex: 0 0 auto;
   border-radius: 8px;
   font-size: 18px;
   opacity: 0;
-  transition: opacity 0.3s, visibility 0s linear 0.3s;
+  transition: opacity 0.3s, visibility 0s linear 0.3s ;
   z-index: 1000;
 }
 
+/* Add this CSS code to your existing styles or create a new stylesheet */
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-name {
+  margin-right: 10px;
+  /* Adjust the margin as needed */
+  font-weight: bold;
+  /* Optionally, make the user's name bold */
+}
+
+.user-info button {
+  background-color: #fff;
+  /* Customize the button background color */
+  border: 1px solid #ccc;
+  /* Customize the button border */
+  padding: 5px 10px;
+  /* Adjust the padding as needed */
+  cursor: pointer;
+  font-size: 14px;
+  /* Adjust the font size as needed */
+}
+
+/* Optionally, add hover styles for the button */
+.user-info button:hover {
+  background-color: #ccc;
+}
 .login {
   visibility: hidden;
   position: fixed;
@@ -7314,25 +7348,14 @@ flex: 0 0 auto;
   border-radius: 8px;
   font-size: 18px;
   opacity: 0;
-  transition: opacity 0.3s, visibility 0s linear 0.3s;
+  transition: opacity 0.3s, visibility 0s linear 0.3s ;
   z-index: 1000;
 }
-.toast.show {
+.userexist .show  {
   visibility: visible;
   opacity: 1;
   animation: slideIn 0.5s, slideOut 0.5s 2.5s;
 }
-.signup .showsignup {
-  visibility: visible;
-  opacity: 1;
-  animation: slideIn 0.5s, slideOut 0.5s 2.5s;
-}
-.login .showlogin {
-  visibility: visible;
-  opacity: 1;
-  animation: slideIn 0.5s, slideOut 0.5s 2.5s;
-}
-
 @keyframes slideIn {
   from {
     transform: translateY(-50%);

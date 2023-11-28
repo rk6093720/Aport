@@ -119,7 +119,13 @@
                                 <li>
                                     <a href="login.html">Login</a>
                                 </li>
+                                <li>
+                                <div class="user-info" style="display: none;">
+                                    <span class="user-name"></span>
+                                    <button onclick="logout()">Logout</button>
+                                </div>
                             </ul>
+                           
                         </div>
                         <div class="main-menu-two__right">
                             <div class="main-menu-two__search-btn-box">
@@ -1406,5 +1412,14 @@
     <!-- template js -->
     <script src="assets/js/aports.js"></script>
 </body>
-
 </html>
+<script>
+    var usersData = JSON.parse(localStorage.getItem("usersData"))
+     var user = usersData[0];
+        document.querySelector(".user-name").textContent = user.firstName + " " + user.lastName
+        document.querySelector(".user-info").style.display = "flex"; // Change display to flex
+        // Hide the login-related elements
+        document.querySelectorAll('.main-menu__list li a[href="signup.html"], .main-menu__list li a[href="login.html"]').forEach(element => {
+            element.style.display = "none";
+        });
+</script>
