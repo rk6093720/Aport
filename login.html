@@ -409,8 +409,8 @@
                     }
                     if (res.data.status === "ok") {
                         alert("Login Successful");
-                         localStorage.setItem("token", res.data.data);
-                         window.location.href="./index.html";
+                         localStorage.setItem("token",JSON.stringify( res.data.data));
+                       window.location.href="./index.html";
                             // login success hua toh username navbar pe dikhna hai aur logout ka button
                     }
                 })

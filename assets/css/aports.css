@@ -1308,12 +1308,18 @@ ul {
   display: block;
   padding: 24.5px 0;
 }
+.user-info {
+  position: absolute;
+  display: block;
+  right:20%;
+}
 
 .main-menu-two__main-menu-box {
   position: relative;
   display: block;
   
 }
+
 
 .main-menu-two__right {
   position: relative;
@@ -7308,12 +7314,13 @@ flex: 0 0 auto;
 /* Add this CSS code to your existing styles or create a new stylesheet */
 
 .user-info {
-  display: flex;
+  display: block;
   align-items: center;
+  margin-right: 1%;
 }
 
 .user-name {
-  margin-right: 10px;
+  margin-right: 0px;
   /* Adjust the margin as needed */
   font-weight: bold;
   /* Optionally, make the user's name bold */
@@ -7321,14 +7328,10 @@ flex: 0 0 auto;
 
 .user-info button {
   background-color: #fff;
-  /* Customize the button background color */
-  border: 1px solid #ccc;
-  /* Customize the button border */
   padding: 5px 10px;
-  /* Adjust the padding as needed */
   cursor: pointer;
   font-size: 14px;
-  /* Adjust the font size as needed */
+  border-radius: 10%;
 }
 
 /* Optionally, add hover styles for the button */

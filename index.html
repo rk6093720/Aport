@@ -119,14 +119,9 @@
                                 <li>
                                     <a href="login.html">Login</a>
                                 </li>
-                                <li>
-                                <div class="user-info" style="display: none;">
-                                    <span class="user-name"></span>
-                                    <button onclick="logout()">Logout</button>
-                                </div>
                             </ul>
-                           
                         </div>
+                       
                         <div class="main-menu-two__right">
                             <div class="main-menu-two__search-btn-box">
                                 <div class="main-menu-two__search-box">
@@ -136,6 +131,10 @@
                                     <a href="contact.html" class="thm-btn main-menu-two__btn">Schedule a Visit</a>
                                 </div>
                             </div>
+                        </div>
+                        <div class="user-info" style="display: none;">
+                            <span class="user-name"></span>
+                            <button class="button">Logout</button>
                         </div>
                     </div>
                 </div>
@@ -1414,12 +1413,43 @@
 </body>
 </html>
 <script>
-    var usersData = JSON.parse(localStorage.getItem("usersData"))
-     var user = usersData[0];
-        document.querySelector(".user-name").textContent = user.firstName + " " + user.lastName
-        document.querySelector(".user-info").style.display = "flex"; // Change display to flex
-        // Hide the login-related elements
+   document.addEventListener("DOMContentLoaded", function () {
+        // Check if the user is logged in
+        var token =JSON.parse(localStorage.getItem("token"));
+        console.log(token.token, token.userData)
+        if (token.token) {
+            // User is logged in
+            if (token.token && token.userData) {
+                document.querySelector(".user-name").textContent = token.userData.firstName + " " + token.userData.lastName;
+                document.querySelector(".user-info").style.display = "flex";
+            } else {
+                // Handle the case where user data is not available
+                console.log("User data not found.");
+            }
+            // Hide the login-related elements
+            document.querySelectorAll('.main-menu__list li a[href="signup.html"], .main-menu__list li a[href="login.html"]').forEach(element => {
+                element.style.display = "none";
+            });
+
+            // Add event listener for logout button
+            document.querySelector(".button").addEventListener("click", logout);
+        } else {
+            // User is not logged in
+            // Show the login-related elements
+            document.querySelector(".user-info").style.display = "none";
+            document.querySelectorAll('.main-menu__list li a[href="signup.html"], .main-menu__list li a[href="login.html"]').forEach(element => {
+                element.style.display = "block";
+            });
+        }
+    });
+
+    function logout() {
+        localStorage.removeItem("token");
+        // Update the UI when logging out
+        document.querySelector(".user-info").style.display = "none";
         document.querySelectorAll('.main-menu__list li a[href="signup.html"], .main-menu__list li a[href="login.html"]').forEach(element => {
-            element.style.display = "none";
+            element.style.display = "block";
         });
+    }
+
 </script>
