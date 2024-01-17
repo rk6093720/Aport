@@ -104,16 +104,16 @@
                   <ul class="shadow-box">
                     <li><a href="news.html">News</a></li>
                     <li><a href="news-details.html">News Details</a></li>
+                    <li>
+                      <a href="signup.html">SignUp</a>
+                    </li>
+                    <li>
+                      <a href="login.html">Login</a>
+                    </li>
+                    <li>
+                      <a href="contact.html">Contact</a>
+                    </li>
                   </ul>
-                </li>
-                <li>
-                  <a href="contact.html">Contact</a>
-                </li>
-                <li>
-                  <a href="signup.html">SignUp</a>
-                </li>
-                <li>
-                  <a href="login.html">Login</a>
                 </li>
               </ul>
             </div>
@@ -143,7 +143,7 @@
     <div class="container">
       <div class="contact-three__inner">
         <div class="section-title text-center">
-          <span class="section-title__tagline">welcome</span>
+          <span class="section-title__tagline">Welcome User </span>
           <h2 class="section-title__title">SignUp Apartment</h2>
         </div>
         <div class="contact-three__form-box">
@@ -152,68 +152,26 @@
             <div class="row">
               <div class="col-xl-6">
                 <div class="contact-form__input-box">
-                  <input class="firstName" type="text" placeholder="FirstName" name="firstName" required>
-                </div>
-              </div>
-              <div class="col-xl-6">
-                <div class="contact-form__input-box">
-                  <input class="lastName" type="text" placeholder="LastName" name="LastName" required>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xl-6">
-                <div class="contact-form__input-box">
                 <input class="email" type="email" placeholder="Email address" name="email" required>
                 </div>
               </div>
               <div class="col-xl-6">
                 <div class="contact-form__input-box">
-                <input class="adharCard" type="text" placeholder="adharCard" name="adharCard" maxlength="12" required>
+                <input class="userType" type="text" placeholder="userType" value="User" name="User" required>
                 </div>
               </div>
             </div>
             <div class="row">
-              <div class="col-xl-6">
-                <div class="contact-form__input-box">
-                <input class="address" type="text" placeholder="address" name="address" required>
-                </div>
-              </div>
-              <div class="col-xl-6">
-                <div class="contact-form__input-box">
-                <input class="country" type="text" placeholder="country" name="country" required>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xl-6">
-                <div class="contact-form__input-box">
-                <input class="state" type="text" placeholder="state" name="state" required>
-                </div>
-              </div>
-              <div class="col-xl-6">
-                <div class="contact-form__input-box">
-                <input class="city" type="text" placeholder="city" name="city" required>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xl-6">
-                <div class="contact-form__input-box">
-               <input class="postalCode" type="text" placeholder="postalCode" name="postalCode" maxlength="6" required>
-                </div>
-              </div>
-              <div class="col-xl-6">
+              <div class="row-xl-12">
                 <div class="contact-form__input-box">
                 <input class="password" type="password" placeholder="Enter Password" name="password" required>
                 </div>
-              </div>
             </div>
 
             <div class="row">
               <div class="col-xl-12">
-                <div class="contact-form__btn-box">
-                  <button type="submit" class="thm-btn contact-form__btn">SignUp</button>
+                <div class="contact-form__btn-box2">
+                  <button type="submit" id="signup" class="thm-btn contact-form__btn">SignUp</button>
                 </div>
               </div>
             </div>
@@ -402,45 +360,31 @@
 <script>
 
   document.querySelector("form").addEventListener("submit", formSubmit);
-  var userData = JSON.parse(localStorage.getItem("usersData")) || [];
-  function formSubmit(e) {
+  let userData = JSON.parse(localStorage.getItem("UserData")) || [];
+ async function formSubmit(e) {
     e.preventDefault();
-    var firstName = document.querySelector(".firstName").value;
-    var lastName = document.querySelector(".lastName").value;
-    var email = document.querySelector(".email").value;
-    var password = document.querySelector(".password").value;
-    var adharCard = document.querySelector(".adharCard").value;
-    var address = document.querySelector(".address").value;
-    var country = document.querySelector(".country").value;
-    var state = document.querySelector(".state").value;
-    var city = document.querySelector(".city").value;
-    var postalCode = document.querySelector(".postalCode").value;
-    var signupData = {
-      firstName,
-      lastName,
+    let email = document.querySelector(".email").value;
+    let password = document.querySelector(".password").value;
+    let userType = document.querySelector(".userType").value;
+    let signupData = {
       email,
       password,
-      adharCard,
-      address,
-      country,
-      state,
-      city,
-      postalCode
+      userType
     }
-    userData.push(signupData);
-    localStorage.setItem("usersData",JSON.stringify(userData))
-    axios.post("http://localhost:8080/users/signup", signupData, {
-      headers: {
+     userData.push(signupData);
+    localStorage.setItem("UserData",JSON.stringify(userData));
+      await axios.post(`http://localhost:8080/admin/owner-signup`,signupData,{
+      Headers: {
         'Content-Type': 'application/json'
       }
     })
     .then((res)=>{
-      console.log(res)
-          if(res.data.status === "userExists" ){
-            alert("userExists")
+      console.log(res.data,"data");
+      if(res.data.msg === "Email is Already present" ){
+            alert("Email is Already present")
           }
-          else if(res.data.status === "ok"){
-            alert("Signup Successful")
+          else if(res.data.status === "success"){
+            alert("Signup is created Successful")
             setTimeout(()=>{
                  window.location.href="./login.html"
             },2000)
@@ -448,10 +392,7 @@
     })
     .catch((e)=>{
             console.log(e);
-            if (res.data.error === "signup failed") {
-              alert("error")
-            }
-    })
+    })   
   }
 
 

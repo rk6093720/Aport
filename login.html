@@ -197,13 +197,16 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div>
-                                <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> REMEMBER ME
-                                </div> -->
+                                <div class="row-xl-6">
+                                    <div class="contact-form__input-box">
+                                        <a href="./forgetPassword.html">Forget Password</a>
+                                    </div>
+                                </div>
+                                
                                 <div class="row">
                                     <div class="col-xl-12">
                                         <div class="contact-form__btn-box1">
-                                            <button type="submit" class="thm-btn contact-form__btn">LOGIN</button>
+                                            <button type="submit" id="login" class="thm-btn contact-form__btn">LOGIN</button>
                                         </div>
                                         <div class="contact-form__btn-box1">
                                         <button type="submit" id="google" class="thm-btn contact-form__btn"> <i class="fab fa-google"></i></button>
@@ -388,7 +391,7 @@
 </html>
 <script>
        document.querySelector("form").addEventListener("submit", login);
-        var userData = JSON.parse(localStorage.getItem("usersData")) ;
+        var userData = JSON.parse(localStorage.getItem("UserData")) ;
         function login(e) {
             e.preventDefault();
             var email = document.querySelector(".email").value;
@@ -397,7 +400,7 @@
                 email,
                 password
             };
-            axios.post("http://localhost:8080/users/login", payload, {
+            axios.post("http://localhost:8080/admin/user-login", payload, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -407,7 +410,7 @@
                     if (res.data.error === "InvAlid Password") {
                         alert(res.data.error);
                     }
-                    if (res.data.status === "ok") {
+                    if (res.data.status === "success") {
                         alert("Login Successful");
                          localStorage.setItem("token",JSON.stringify( res.data.data));
                        window.location.href="./index.html";

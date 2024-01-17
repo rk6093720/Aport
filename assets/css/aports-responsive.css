@@ -854,7 +854,10 @@
         flex: 0 0 100%;
         max-width: 100%;
     }
-
+         .user-info {
+             display: block;
+             margin-right: 2%;
+         }
 
 
 
@@ -986,6 +989,10 @@
         padding-top: 190px;
         padding-bottom: 189px;
     }
+         .user-info {
+             display: block;
+             margin-right: 2%;
+         }
 
 
 
@@ -1023,15 +1030,10 @@
     .main-menu-two .mobile-nav__toggler:hover {
         color: var(--aports-black);
     }
-
-
-
-
-
-
-
-
-
+         .user-info {
+             display: block;
+             margin-right: 15%;
+         }
 
 }
 
@@ -1058,14 +1060,10 @@
     .main-menu-two .mobile-nav__toggler:hover {
         color: var(--aports-black);
     }
-
-
-
-
-
-
-
-
+   .user-info{
+    display: block;
+    margin-right: 45%;
+   }
 
 
 }
@@ -1135,20 +1133,3 @@
     }
 }
 
-/*
-small size  Reponsiveness
-
-*/
-@media only screen and (min-width: 0px) and (max-width: 425px){
-
-}
-/*
-medium size  Reponsiveness
-
-*/
-@media only screen and (min-width: 425px) and (max-width: 768px) {}
-/*
-Large size  Reponsiveness
-
-*/
-@media only screen and (max-width: 768)  {}
