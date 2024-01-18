@@ -5618,7 +5618,7 @@ ul {
 
 .floor-plan-two__tab-content-details li {
   position: relative;
-  display: flex;
+  display: inline-block;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid var(--aports-bdr-color);
