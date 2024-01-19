@@ -17,7 +17,6 @@
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
         rel="stylesheet">
-
     <link rel="stylesheet" href="assets/vendors/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/vendors/animate/animate.min.css" />
     <link rel="stylesheet" href="assets/vendors/animate/custom-animate.css" />
@@ -68,7 +67,7 @@
                             <ul class="main-menu__list">
                                 <li class="dropdown current">
                                     <a href="index.html">Home </a>
-                                    <ul class="shadow-box">
+                                    <!-- <ul class="shadow-box">
                                         <li><a href="index.html">Home One</a></li>
                                         <li><a href="index2.html">Home Two</a></li>
                                         <li><a href="index3.html">Home Three</a></li>
@@ -80,7 +79,7 @@
                                                 <li><a href="index3.html">Header Three</a></li>
                                             </ul>
                                         </li>
-                                    </ul>
+                                    </ul> -->
                                 </li>
                                 <li>
                                     <a href="about.html">About</a>
@@ -88,12 +87,12 @@
                                 <li class="dropdown">
                                     <a href="#">Pages</a>
                                     <ul class="shadow-box">
-                                        <li><a href="services.html">Services</a>
+                                        <!-- <li><a href="services.html">Services</a>
                                         </li>
                                         <li><a href="the-building.html">The Building</a>
                                         </li>
                                         <li><a href="agents.html">Agents</a></li>
-                                        <li><a href="faq.html">FAQs</a></li>
+                                        <li><a href="faq.html">FAQs</a></li> -->
                                         <li><a href="tentant.html">Tentant</a></li>
                                     </ul>
                                 </li>
@@ -122,13 +121,27 @@
                                     <div class="main-menu-two__search-box">
                                         <a href="#" class="main-menu-two__search search-toggler icon-magnifying-glass"></a>
                                     </div>
-                                    <div class="user-info"  style="display: none;">
-                                        <span class="user-name"></span>
-                                        <button class="button">Logout</button>
-                                    </div>
+                                    
                                 <div class="main-menu-two__btn-box">
-                                        <a href="signup.html" class="thm-btn main-menu-two__btn">SignUp</a>
-                                        <a href="login.html" style="margin-left: 5px;" class="thm-btn main-menu-two__btn">Login</a>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" style="background-color: #ceae92;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                           MyProfile
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="./signup.html">SignUp</a></li>
+                                            <li><a class="dropdown-item" href="./login.html">Login</a></li>
+                                             <li class="dropdown-item">
+                                                <button type="button"  id="profile" style="width: 100%;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">profile</button>
+                                              </li>   
+                                             <li class="dropdown-item">
+                                             <div >
+                                              <span class="user-name"></span>
+                                                 <button class="btn btn-danger">Logout</button>
+                                                 </div>
+                                                </li>
+                                             
+                                        </ul>
+                                        </div> 
                                 </div>
                             </div>
                         </div>
@@ -889,7 +902,7 @@
                     <!--Apartments Two Single Start-->
                     <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="100ms">
                         <div class="apartments-two__single">
-                            <div class="apartments-two__img">
+                            <!-- <div class="apartments-two__img">
                                 <img src="https://media.istockphoto.com/id/487313304/photo/luxurious-living-room.jpg?s=2048x2048&w=is&k=20&c=38tz2Pu7EFS8KyMYgaMZYXV11n-hM2ASMevpVp_KSQw=" alt="">
                             </div>
                             <div class="apartments-two__content">
@@ -900,71 +913,14 @@
                                 <div class="apartments-two__content-right">
                                     <a href="apartment-details.html" class="apartments-two__btn thm-btn">120 m2</a>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
-                    <!--Apartments Two Single End-->
-                    <!--Apartments Two Single Start-->
-                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
-                        <div class="apartments-two__single">
-                            <div class="apartments-two__img">
-
-                                <img src="https://www.squareyards.com/cdn-cgi/image/width=370,height=250,quality=80,fit=crop,gravity=auto,format=webp/https://img.squareyards.com/secondaryPortal/638279579814211822-1808231219411941.jpg" alt="">
-                            </div>
-                            <div class="apartments-two__content">
-                                <div class="apartments-two__content-left">
-                                    <h3 class="apartments-two__title"><a href="apartment-details.html">Studio</a></h3>
-                                    <p class="apartments-two__tagline">Explore now</p>
-                                </div>
-                                <div class="apartments-two__content-right">
-                                    <a href="apartment-details.html" class="apartments-two__btn thm-btn">120 m2</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Apartments Two Single End-->
-                    <!--Apartments Two Single Start-->
-                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms">
-                        <div class="apartments-two__single">
-                            <div class="apartments-two__img">
-                                <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/04/0e/69/39/hotel-ashok-deluxe-apartments.jpg?w=700&h=-1&s=1" alt="">
-                            </div>
-                            <div class="apartments-two__content">
-                                <div class="apartments-two__content-left">
-                                    <h3 class="apartments-two__title"><a href="apartment-details.html">Duplex</a></h3>
-                                    <p class="apartments-two__tagline">Explore now</p>
-                                </div>
-                                <div class="apartments-two__content-right">
-                                    <a href="apartment-details.html" class="apartments-two__btn thm-btn">120 m2</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Apartments Two Single End-->
-                    <!--Apartments Two Single Start-->
-                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="400ms">
-                        <div class="apartments-two__single">
-                            <div class="apartments-two__img">
-                            <img src="https://cdn-fbdip.nitrocdn.com/sFqadtrxNZHBYqhJRgzOxtTgoZwQGYCz/assets/images/optimized/rev-0a3ace1/suryakirangoa.com/wp-content/uploads/2022/03/Guarden-2-370-x-270.jpg"
-                                style="height: 200px;" alt="">
-
-                            </div>
-                            <div class="apartments-two__content">
-                                <div class="apartments-two__content-left">
-                                    <h3 class="apartments-two__title"><a href="apartment-details.html">Garden </a></h3>
-                                    <p class="apartments-two__tagline">Explore now</p>
-                                </div>
-                                <div class="apartments-two__content-right">
-                                    <a href="apartment-details.html" class="apartments-two__btn thm-btn">120 m2</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Apartments Two Single End-->
                 </div>
             </div>
         </section>
         <!--Apartments Two End-->
+        
 
         <!--News Two Start-->
         <section class="news-two">
@@ -1392,46 +1348,127 @@
     <script src="assets/vendors/circleType/jquery.lettering.min.js"></script>
     <!-- template js -->
     <script src="assets/js/aports.js"></script>
+    <!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col">
+                            <label for="Firstname">Firstname</label>
+                          <input type="text" class="form-control" placeholder="Firstname" aria-label="First name">
+                        </div>
+                        <div class="col">
+                            <label for="Lastname">LastName</label>
+                          <input type="text" class="form-control" placeholder="Lastname" aria-label="Lastname">
+                        </div>
+                      </div>
+                      <br>
+                      <div class="row g-3">
+                        <div class="col">
+                            <label for="email">Email</label>
+                          <input type="email" class="form-control" placeholder="email" aria-label="email">
+                        </div>
+                        <div class="col">
+                            <label for="phone">Phone</label>
+                          <input type="text" class="form-control" c placeholder="phone" maxlength="10" aria-label="phone">
+                        </div>
+                      </div>
+                      <br>
+                      <div class="row g-3">
+                        <div class="col">
+                            <label for="AadharCard">AadharCard</label>
+                          <input type="file" name="aadharCard" accept="application/pdf" class="form-control" placeholder="AadharCard" aria-label="AadharCard" aria-required="true">
+                        </div>
+                        <div class="col">
+                            <label for="PanCard">PanCard</label>
+                          <input type="file" name="panCard" accept="application/pdf" class="form-control" placeholder="panCard" aria-label="panCard" aria-required="true">
+                        </div>
+                      </div>
+                      <br>
+                      <div class="row g-3">
+                        <div class="col">
+                            <label for="Date-of-birth">Date-of-birth</label>
+                          <input type="date" class="form-control" placeholder="dob" aria-label="date" aria-placeholder="date-of-birth">
+                        </div>
+                        <div class="col">
+                            <label for="city">Registration</label>
+                          <input type="date" class="form-control"  placeholder="Registration-of-date" aria-label="Registration-of-date">
+                        </div>
+                      </div>
+                      <br>
+                      <div class="row g-3">
+                        <div class="col">
+                            <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                residential Address
+                            </label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label for="adharcard">adharcard</label>
+                          <input type="text" maxlength="12" class="form-control" c placeholder="adharcard" aria-label="adharcard">
+                        </div>
+                      </div>
+                      <br>
+                      <div class="row g-3">
+                        <div class="col">
+                            <label for="pincode">pincode</label>
+                          <input type="text" maxlength="6" class="form-control" placeholder="pincode" aria-label="pincode">
+                        </div>
+                        <div class="col">
+                            <label for="adharcard">adharcard</label>
+                          <input type="text" maxlength="12" class="form-control" c placeholder="adharcard" aria-label="adharcard">
+                        </div>
+                      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Create An Account</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
 <script>
-   document.addEventListener("DOMContentLoaded", function () {
-        // Check if the user is logged in
-        var token =JSON.parse(localStorage.getItem("token"));
-        console.log(token.token, token.email.split("@")[0])
-        if (token.token) {
-            // User is logged in
-            if (token.token ) {
-                document.querySelector(".user-name").textContent = token.email.split("@")[0];
-                document.querySelector(".user-info").style.display = "flex";
-            } else {
-                // Handle the case where user data is not available
-                console.log("User data not found.");
-            }
-            // Hide the login-related elements
-            document.querySelectorAll('.main-menu-two__btn-box a[href="signup.html"], .main-menu-two__btn-box a[href="login.html"]').forEach(element => {
-                element.style.display = "none";
-            });
-
-            // Add event listener for logout button
-            document.querySelector(".button").addEventListener("click", logout);
-        } else {
-            // User is not logged in
-            // Show the login-related elements
-            document.querySelector(".user-info").style.display = "none";
-            document.querySelectorAll('.main-menu-two__btn-box a[href="signup.html"], .main-menu-two__btn-box a[href="login.html"]').forEach(element => {
-                element.style.display = "block";
-            });
-        }
-    });
-     function logout() {
-        localStorage.removeItem("token");
-        // Update the UI when logging out
-        document.querySelector(".user-info").style.display = "none";
-        document.querySelectorAll('.main-menu-two__btn-box a[href="signup.html"], .main-menu-two__btn-box a[href="login.html"]').forEach(element => {
-            element.style.display = "block";
-        });
+  document.addEventListener("DOMContentLoaded", function () {
+    // Check if the user is logged in
+    var token = JSON.parse(localStorage.getItem("token"));
+    if (token && token.token) {
+        // User is logged in
+        document.querySelector(".user-name").textContent = token.email.split("@")[0];
+        document.querySelector(".main-menu-two__btn-box .dropdown-menu li a[href='./signup.html']").style.display = "none";
+        document.querySelector(".main-menu-two__btn-box .dropdown-menu li a[href='./login.html']").style.display = "none";
+        document.querySelector(".user-name").style.display = "inline-block";
+        document.querySelector(".btn.btn-danger").style.display = "inline-block";
+        
+        // Add event listener for logout button
+        document.querySelector(".btn.btn-danger").addEventListener("click", logout);
+    } else {
+        // User is not logged in
+        // Show the login-related elements
+        document.querySelector(".user-name").style.display = "none";
+        document.querySelector(".btn.btn-danger").style.display = "none";
     }
+});
+
+function logout() {
+    localStorage.removeItem("token");
+    // Update the UI when logging out
+    document.querySelector(".user-name").style.display = "none";
+    document.querySelector(".btn.btn-danger").style.display = "none";
+    document.querySelector(".main-menu-two__btn-box .dropdown-menu li a[href='./signup.html']").style.display = "inline-block";
+    document.querySelector(".main-menu-two__btn-box .dropdown-menu li a[href='./login.html']").style.display = "inline-block";
+}
+
     let apartmentData;
     async function getApartmentDetails(){
         let data= await fetch("http://localhost:8080/apartment/read");
@@ -1476,4 +1513,8 @@
             apartment.append(div,ContentDiv)
         })
     }
+  //  document.getElementById("profile").addEventListener("click", createProfile);
+  //  function createProfile(){
+    //    alert("please create your profile ")
+    //}
 </script>
