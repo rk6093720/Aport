@@ -406,7 +406,7 @@
                 }
             })
                 .then((res) => {
-                    console.log(res)
+                    console.log(res.data)
                     if (res.data.error === "InvAlid Password") {
                         alert(res.data.error);
                     }
@@ -416,9 +416,10 @@
                        window.location.href="./index.html";
                             // login success hua toh username navbar pe dikhna hai aur logout ka button
                     }
+                    
                 })
                 .catch((e) => {
-                    console.log(e);
+                    alert(e.message);
                 });
         }
 

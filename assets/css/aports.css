@@ -1270,7 +1270,7 @@ ul {
 .mobile-nav__container .topbar__buttons,
 .mobile-nav__container .main-menu__language,
 .mobile-nav__container .main-menu__login {
-  display: none;
+  display:none;
 }
 
 /*--------------------------------------------------------------
