@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Contact || Aports || Aports HTML 5 Template </title>
+    <title> Contact  </title>
     <!-- favicons Icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicons/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png" />
@@ -98,9 +98,59 @@
                         </div>
                     </div>
                 </div>
+                
             </div>
- 
+            <nav class="main-menu">
+            <div class="main-menu__wrapper">
+                <div class="main-menu__wrapper-inner">
+                    <div class="main-menu__left">
+                        <div class="main-menu__logo">
+                            <a href="index.html"><img src="assets/images/resources/logo-1.png" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="main-menu__main-menu-box">
+                        <a href="#" class="mobile-nav__toggler"><i class="fa fa-bars"></i></a>
+                        <ul class="main-menu__list">
+                            <li class="current" class="dropdown" >
+                                <a href="index.html">Home </a>
+                            </li>
+                            <li class="current">
+                                <a href="about.html">About</a>
+                            </li>
+                            <li class="current" class="dropdown" >
+                                <a href="#">Appartments</a>
+                                <ul class="shadow-box">
+                                    <li><a href="apartments.html">Apartments</a></li>
+                                    <li><a href="apartment-details.html">Apartment Details</a></li>
+                                </ul>
+                            </li>
+                            <li class="current" class="dropdown">
+                                <a href="#">News</a>
+                                <ul class="shadow-box">
+                                    <li><a href="news.html">News</a></li>
+                                    <li><a href="news-details.html">News Details</a></li>
+                                </ul>
+                            </li>
+                            <li class="current">
+                                <a href="contact.html">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="main-menu__right">
+                        <div class="main-menu__search-btn-box">
+                            <!-- <div class="main-menu__search-box">
+                                <a href="#" class="main-menu__search search-toggler icon-magnifying-glass"></a>
+                            </div>
+                            <div class="main-menu__btn-box">
+                                <a href="contact.html" class="thm-btn main-menu__btn">Schedule a Visit</a>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
         </header>
+    
 
         <div class="stricky-header stricked-menu main-menu">
             <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
@@ -122,7 +172,7 @@
             </div>
         </section> -->
         <!--Page Header End-->
-
+<br>
         <!--Contact Two Start-->
         <section class="contact-two">
             <div class="container">
@@ -195,7 +245,7 @@
                         <h2 class="section-title__title">FeedBack for Apartment</h2>
                     </div>
                     <div class="contact-three__form-box">
-                        <form action="assets/inc/sendemail.php" class="contact-three__form contact-form-validated"
+                        <form id="my-form" class="contact-three__form contact-form-validated"
                             novalidate="novalidate">
                             <div class="row">
                                 <div class="col-xl-6">
@@ -354,34 +404,43 @@
     <script src="assets/vendors/timepicker/timePicker.js"></script>
     <script src="assets/vendors/circleType/jquery.circleType.js"></script>
     <script src="assets/vendors/circleType/jquery.lettering.min.js"></script>
-
-
-
-
     <!-- template js -->
     <script src="assets/js/aports.js"></script>
 </body>
 </html>
 <script>
-document.querySelector("form").addEventListener("submit", feedback);
-async function feedback(){
+document.getElementById("my-form").addEventListener("submit", feedback);
+async function feedback(e){
+    e.preventDefault();
     let name = document.getElementById("name").value;
     let email = document.getElementById("email").value;
-    let message = document.getElementById("message").value;
+    let description = document.getElementById("message").value;
     const payload = {
         name,
         email,
-        message
+        description
     }
     try{
         const res = await fetch("http://localhost:8080/feedback/create",{
             method:"POST",
-            body:JSON.stringify(data)
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify(payload)
         })
         const data = await res.json();
-        console.log(data)
+        //console.log("data",data);
+        if(data.status === "success"){
+            alert(data.msg)
+            setTimeout(()=>{
+                 window.location.href = "./index.html"
+            },2000)
+        }
+        else if(data.msg === "Feedback is already there"){
+            alert(data.msg)
+        }
     }catch(e){
-        alert(e.message)
+        alert("error",e.message)
     }
 }
 </script>
