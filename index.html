@@ -1582,11 +1582,11 @@ async function AddUser(e) {
         body:formData
        });
        const data = await res.json();
+       console.log(data)
         if(data.message === "User already exists"){
            alert(data.message)
-        }
-        else if(data.message === "User is Create Successfully "){
-            alert(data.message)
+        }else {
+            alert(data.msg)
         }
     } catch (e) {
         alert(e.message);

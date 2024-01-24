@@ -627,8 +627,38 @@
            btn.style.marginTop="120px";
            btn.style.marginLeft="10px";
            btn.textContent = "Request For Contract";
-           btn.addEventListener("click",function(){
-               requestforContract()
+           btn.addEventListener("click", async function(){
+                    try{
+                        let requestId = await getTentant();
+                    console.log("request",requestId._id)
+                    const res = await fetch("http://localhost:8080/tentants/request-contract",{
+                        method:"POST",
+                        headers:{
+                            "Content-Type":"application/json"
+                        },
+                        body:JSON.stringify({contract:"pending"})
+                    })
+                    const data = await res.json();
+                    console.log(data)
+                    if(data.contract === "pending"){
+                        btn.textContent= data.contract;
+                    }
+                    // alert("request for contract")
+                    }catch(e){
+                        alert(e.message)
+                    }     
+                    
+                    async function getTentant(){
+                        try{
+                            const res = await fetch("http://localhost:8080/tentants/read");
+                            const data = await res.json();
+                            let id = data.Tentant.find((item)=>(item._id))
+                            return id;
+                        }catch(e){
+                            alert(e.msg)
+                        }
+                    }
+
            })
            contentBox.append(header,para,btn);
            apartmentDetails.append(containerDiv,contentBox);
@@ -702,8 +732,5 @@
             floorApartmentDetail.append(row);            
         }
     }
-    */
-    function requestforContract(){
-        alert("request for contract")
-    }
+    */   
 </script>
