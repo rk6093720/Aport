@@ -627,6 +627,17 @@
            btn.style.marginTop="120px";
            btn.style.marginLeft="10px";
            btn.textContent = "Request For Contract";
+      //     function load() {
+       //         return new Promise((resolve) => {
+            //        setTimeout(() => {
+          //              let request = localStorage.getItem("requestForcontract");
+           //             if (request) {
+           //                 btn.textContent = "Pending";
+         //               }
+          //              resolve(); // Resolve the promise to signal that the load operation is complete
+         //           }, 0);
+        //        });
+        //    }
            btn.addEventListener("click", async function(){
                     try{
                         let requestId = await getTentant();
@@ -656,12 +667,19 @@
                         },2000)
                         alert(data.newNotification.contract);
                     }
+                    localStorage.setItem("requestForcontract","true");
+                  //  await load()
                     // alert("request for contract")
                     }catch(e){
                         alert(e.message)
                     }     
-                    
-                    async function getTentant(){
+
+           })
+           contentBox.append(header,para,btn);
+           apartmentDetails.append(containerDiv,contentBox);
+        } 
+    }
+        async function getTentant(){
                         try{
                             const res = await fetch("http://localhost:8080/tentants/read");
                             const data = await res.json();
@@ -671,79 +689,5 @@
                             alert(e.msg)
                         }
                     }
-
-           })
-           contentBox.append(header,para,btn);
-           apartmentDetails.append(containerDiv,contentBox);
-        } 
-    }
-    /*
-    let modal = document.getElementById("myModal");
-    let floorApartmentDetail = document.querySelector(".floor-plan-two__tab-content");
-    function floorApartment(details){
-        floorApartmentDetail.innerHTML="";
-        if(details){
-            let row = document.createElement("div");
-            row.classList.add("row");
-            let div = document.createElement("div");
-            div.classList.add("col-xl-7");
-            let floorDiv = document.createElement("div");
-            floorDiv.setAttribute("class","floor-plan-two__tab-content-img");
-            let image = document.createElement("img");
-            image.src = `${base + details.apartmentImage}`
-            floorDiv.append(image);
-            div.append(floorDiv);
-            let secondDiv = document.createElement("div");
-            secondDiv.classList.add("col-xl-5");
-            let secondFloorDiv = document.createElement("div");
-            secondFloorDiv.setAttribute("class","floor-plan-two__tab-content-right");
-            let text = document.createElement("p");
-            text.setAttribute("class","floor-plan-two__tab-content-text");
-            text.textContent = details.description;
-            let unOrderList = document.createElement("ul");
-            unOrderList.classList.add("list-unstyled","floor-plan-two__tab-content-details");
-            let list = document.createElement("li");
-            let listDiv = document.createElement("div");
-            let totalAreaText = document.createElement("p");
-            totalAreaText.textContent = "Total Area";
-            let totalArea = document.createElement("span");
-            totalArea.textContent = details.area;
-            let floorText = document.createElement("p");
-            floorText.textContent = "Floor";
-            let floor = document.createElement("span");
-            floor.textContent = details.floor;
-            let bedRoomsText = document.createElement("p");
-            bedRoomsText.textContent = "No Of BedRooms";
-            let bedRooms = document.createElement("span");
-            bedRooms.textContent = details.bedRooms;
-            let parkingsText = document.createElement("p");
-            parkingsText.textContent = "Parking Available";
-            let parkings = document.createElement("span");
-            parkings.textContent = details.parking;
-            let priceText = document.createElement("p");
-            priceText.textContent = "Price";
-            let price = document.createElement("span");
-            price.textContent = details.price;
-            listDiv.append(totalAreaText,totalArea,floorText,floor,bedRoomsText,bedRooms,parkingsText,parkings,priceText,price);
-            list.append(listDiv);
-            unOrderList.append(list);
-            let buttonDiv= document.createElement("div");
-            buttonDiv.classList.add("button-group");
-            let btnLeft = document.createElement("div");
-            btnLeft.classList.add("button-left");
-            let btn = document.createElement("button");
-            btn.classList.add("btn","btn-danger");
-            btn.textContent = "Request For Contract";
-            btn.addEventListener("click", function (){
-              //  btn.textContent = "Pending"
-            })
-            btnLeft.append(btn);
-            buttonDiv.append(btnLeft);
-            secondFloorDiv.append(text,unOrderList,buttonDiv);
-            secondDiv.append(secondFloorDiv);
-            row.append(div,secondDiv);
-            floorApartmentDetail.append(row);            
-        }
-    }
-    */   
+//(async () => await load())();  
 </script>
