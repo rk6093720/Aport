@@ -77,12 +77,6 @@
                                 <li class="dropdown">
                                     <a href="#">Pages</a>
                                     <ul class="shadow-box">
-                                        <!-- <li><a href="services.html">Services</a>
-                                        </li>
-                                        <li><a href="the-building.html">The Building</a>
-                                        </li>
-                                        <li><a href="agents.html">Agents</a></li>
-                                        <li><a href="faq.html">FAQs</a></li> -->
                                         <li><a href="tentant.html">Tentant</a></li>
                                     </ul>
                                 </li>
@@ -100,9 +94,28 @@
                                         <li><a href="news-details.html">News Details</a></li>
                                     </ul>
                                 </li>
-                                <li>
+                                <li >
                                     <a href="contact.html">Contact</a>
                                 </li>
+                                <li class="dropdown">
+                                <a href="#"> MyProfile</a>
+                                      <ul class="shadow-box">
+                                            <li><a  href="./signup.html">SignUp</a></li>
+                                            <li><a  href="./login.html">Login</a></li>
+                                             <li >
+                                                <button type="button"  id="profile" style="width: 100%;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">profile</button>
+                                              </li>   
+                                             <li >
+                                             <div >
+                                              <span class="user-name"></span>
+                                                 <button class="btn btn-danger">Logout</button>
+                                                 </div>
+                                                </li>
+                                             
+                                        </ul>
+                                </li> 
+                                
+                                
                             </ul>
                         </div>
                        
@@ -111,28 +124,6 @@
                                     <div class="main-menu-two__search-box">
                                         <a href="#" class="main-menu-two__search search-toggler icon-magnifying-glass"></a>
                                     </div>
-                                    
-                                <div class="main-menu-two__btn-box">
-                                    <div class="dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle" style="background-color: #ceae92;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                           MyProfile
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="./signup.html">SignUp</a></li>
-                                            <li><a class="dropdown-item" href="./login.html">Login</a></li>
-                                             <li class="dropdown-item">
-                                                <button type="button"  id="profile" style="width: 100%;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">profile</button>
-                                              </li>   
-                                             <li class="dropdown-item">
-                                             <div >
-                                              <span class="user-name"></span>
-                                                 <button class="btn btn-danger">Logout</button>
-                                                 </div>
-                                                </li>
-                                             
-                                        </ul>
-                                        </div> 
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -1271,7 +1262,9 @@
                         alt="" /></a>
             </div>
             <!-- /.logo-box -->
-            <div class="mobile-nav__container"></div>
+            <div class="mobile-nav__container">
+                  
+            </div>
             <!-- /.mobile-nav__container -->
 
             <ul class="mobile-nav__contact list-unstyled">
@@ -1466,8 +1459,8 @@
     if (token && token.token) {
         // User is logged in
         document.querySelector(".user-name").textContent = token.email.split("@")[0];
-        document.querySelector(".main-menu-two__btn-box .dropdown-menu li a[href='./signup.html']").style.display = "none";
-        document.querySelector(".main-menu-two__btn-box .dropdown-menu li a[href='./login.html']").style.display = "none";
+        document.querySelector(".main-menu__list  li a[href='./signup.html']").style.display = "none";
+        document.querySelector(".main-menu__list  li a[href='./login.html']").style.display = "none";
         document.querySelector(".user-name").style.display = "inline-block";
         document.querySelector(".btn.btn-danger").style.display = "inline-block";
         
@@ -1486,8 +1479,8 @@ function logout() {
     // Update the UI when logging out
     document.querySelector(".user-name").style.display = "none";
     document.querySelector(".btn.btn-danger").style.display = "none";
-    document.querySelector(".main-menu-two__btn-box .dropdown-menu li a[href='./signup.html']").style.display = "inline-block";
-    document.querySelector(".main-menu-two__btn-box .dropdown-menu li a[href='./login.html']").style.display = "inline-block";
+    document.querySelector(".main-menu__list  li a[href='./signup.html']").style.display = "inline-block";
+    document.querySelector(".main-menu__list  li a[href='./login.html']").style.display = "inline-block";
 }
 
     let apartmentData;

@@ -630,18 +630,31 @@
            btn.addEventListener("click", async function(){
                     try{
                         let requestId = await getTentant();
-                    console.log("request",requestId._id)
-                    const res = await fetch("http://localhost:8080/tentants/request-contract",{
+                    console.log("request",requestId._id);
+                    const payload={
+                        tentantsId:requestId,
+                        contract:"pending",
+                        apartmentId:details
+                    }
+                    const res = await fetch("http://localhost:8080/tentants/notification",{
                         method:"POST",
                         headers:{
                             "Content-Type":"application/json"
                         },
-                        body:JSON.stringify({contract:"pending"})
+                        body:JSON.stringify(payload)
                     })
                     const data = await res.json();
-                    console.log(data)
-                    if(data.contract === "pending"){
-                        btn.textContent= data.contract;
+                    console.log("result of request",data.status)
+                    if(data.status === "failed"){
+                       alert(data.msg)
+                    }
+                    else if(data.status === "success"){
+                        setTimeout(()=>{
+                            if(data.newNotification.contract === "pending"){
+                                btn.textContent = data.newNotification.contract;
+                            }
+                        },2000)
+                        alert(data.newNotification.contract);
                     }
                     // alert("request for contract")
                     }catch(e){

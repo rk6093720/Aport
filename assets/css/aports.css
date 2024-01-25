@@ -1312,7 +1312,8 @@ ul {
 .main-menu-two__main-menu-box{
   position:absolute;
   display: inline-block;
-  left:120%;
+  left: 110%;
+  /* border: 1px solid red; */
 }
 
 .main-menu-two__wrapper-inner {
@@ -1322,7 +1323,7 @@ ul {
 .main-menu-two__right {
   position: absolute;
   display:flex;
-  left: 900%;
+  left: 1100%;
   width: 100px;
   height: 100px;
   /* border: 2px solid seagreen; */
