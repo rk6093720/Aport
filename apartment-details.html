@@ -256,6 +256,7 @@
                                     </div>
                                 </li>
                             </ul> -->
+                            <button class="button"></button>
                         </div>
                     </div>
                 </div>
@@ -549,145 +550,160 @@
 </body>
 </html>
 <script>
-      const urlParams = new URLSearchParams(window.location.search);
-        const apartmentId = urlParams.get('id');
-        console.log('Apartment ID:', apartmentId);
-     let details;
-    async function getApartmentDetails(){
-        let data= await fetch("http://localhost:8080/apartment/read");
+    const urlParams = new URLSearchParams(window.location.search);
+    const apartmentId = urlParams.get('id');
+    console.log('Apartment ID:', apartmentId);
+    var btn = document.querySelector(".button");
+    btn.classList.add("btn","btn-danger")
+    let details;
+       async function getApartmentDetails() {
+        let data = await fetch("http://localhost:8080/apartment/read");
         let res = await data.json();
-       // console.log(res)
-        let apartmentData =res.data.getData;
-         details = apartmentData.find((item)=> item._id === apartmentId);
-        //console.log(details,"details")
+        let apartmentData = res.data.getData;
+        details = apartmentData.find((item) => item._id === apartmentId);
         displayApartment(details);
-        //floorApartment(details);
     }
     getApartmentDetails();
-     const base = "http://localhost:8080/";
-    let apartmentDetails = document.querySelector(".col-xl-12"); //1
-    function displayApartment(details){
-         apartmentDetails.innerHTML="";
-        if(details){
-            console.log(details)
-           let containerDiv = document.createElement("div");//2
-           containerDiv.setAttribute("class","apartment-details__img-box");
-           let imageDiv = document.createElement("div"); //3
-           imageDiv.setAttribute("class","apartment-details__img");
-           let image = document.createElement("img");//3.a
-           image.src = `${base + details.apartmentImage}`;
-           imageDiv.append(image);
-           let listDiv = document.createElement("div");//b
-           listDiv.setAttribute("class","apartment-details__list-box");
-           let unorderList = document.createElement("ul");
-           unorderList.classList.add("list-unstyled","apartment-details__list");
-           let list = document.createElement("li");
-           let divList = document.createElement("div");
-           divList.setAttribute("class","apartment-details__list-content");
-           let heading = document.createElement("h3");
-           heading.textContent = details.area;
-           let text = document.createElement("p");
-           text.textContent = "Square-Area";
-           let floor = document.createElement("h3");
-           floor.textContent = details.floor;
-           let floorText = document.createElement("p");
-           floorText.textContent = "Floor";
+        const base = "http://localhost:8080/";
+    let apartmentDetails = document.querySelector(".col-xl-12");
+
+    async function displayApartment(details) {
+        apartmentDetails.innerHTML = "";
+        if (details) {
+            let containerDiv = document.createElement("div");
+            containerDiv.setAttribute("class", "apartment-details__img-box");
+            let imageDiv = document.createElement("div");
+            imageDiv.setAttribute("class", "apartment-details__img");
+            let image = document.createElement("img");
+            image.src = `${base + details.apartmentImage}`;
+            imageDiv.append(image);
+            let listDiv = document.createElement("div");
+            listDiv.setAttribute("class", "apartment-details__list-box");
+            let unorderList = document.createElement("ul");
+            unorderList.classList.add("list-unstyled", "apartment-details__list");
+            let list = document.createElement("li");
+            let divList = document.createElement("div");
+            divList.setAttribute("class", "apartment-details__list-content");
+            let heading = document.createElement("h3");
+            heading.textContent = details.area;
+            let text = document.createElement("p");
+            text.textContent = "Square-Area";
+            let floor = document.createElement("h3");
+            floor.textContent = details.floor;
+            let floorText = document.createElement("p");
+            floorText.textContent = "Floor";
             let bedroom = document.createElement("h3");
-           bedroom.textContent = details.bedRooms;
-           let bedroomText = document.createElement("p");
-           bedroomText.textContent = "Bedrooms";
+            bedroom.textContent = details.bedRooms;
+            let bedroomText = document.createElement("p");
+            bedroomText.textContent = "Bedrooms";
             let bathRooms = document.createElement("h3");
-           bathRooms.textContent = details.bathRooms;
-           let bathRoomsText = document.createElement("p");
-           bathRoomsText.textContent = "bathrooms";
+            bathRooms.textContent = details.bathRooms;
+            let bathRoomsText = document.createElement("p");
+            bathRoomsText.textContent = "bathrooms";
             let terrace = document.createElement("h3");
-           terrace.textContent = details.terrace;
-           let terraceText = document.createElement("p");
-           terraceText.textContent = "terrace";
-           let price = document.createElement("h3");
-           price.textContent = details.price;
-           let priceText = document.createElement("p");
-           priceText.textContent = "Price";
-           divList.append(heading,text,floor,floorText,bedroom,bedroomText,bathRooms,bathRoomsText,terrace,terraceText, price,priceText);
-           list.append(divList);
-           unorderList.append(list);
-           listDiv.append(unorderList);
-           imageDiv.append(listDiv);
-           containerDiv.append(imageDiv);
-           let contentBox = document.createElement("div");
-           contentBox.setAttribute("class","apartment-details__content-box");
-           let header = document.createElement("h3");
-           header.setAttribute("class","apartment-details__content-title");
-           header.textContent = details.title;
-           let para = document.createElement("p");
-           para.setAttribute("class","apartment-details__text-1");
-           para.textContent = details.description;
-           let btn = document.createElement("button");
-           btn.classList.add("btn","btn-danger"); 
-           btn.style.marginTop="120px";
-           btn.style.marginLeft="10px";
-           btn.textContent = "Request For Contract";
-      //     function load() {
-       //         return new Promise((resolve) => {
-            //        setTimeout(() => {
-          //              let request = localStorage.getItem("requestForcontract");
-           //             if (request) {
-           //                 btn.textContent = "Pending";
-         //               }
-          //              resolve(); // Resolve the promise to signal that the load operation is complete
-         //           }, 0);
-        //        });
-        //    }
-           btn.addEventListener("click", async function(){
-                    try{
-                        let requestId = await getTentant();
-                    console.log("request",requestId._id);
-                    const payload={
-                        tentantsId:requestId,
-                        contract:"pending",
-                        apartmentId:details
+            terrace.textContent = details.terrace;
+            let terraceText = document.createElement("p");
+            terraceText.textContent = "terrace";
+            let price = document.createElement("h3");
+            price.textContent = details.price;
+            let priceText = document.createElement("p");
+            priceText.textContent = "Price";
+            divList.append(heading, text, floor, floorText, bedroom, bedroomText, bathRooms, bathRoomsText, terrace, terraceText, price, priceText);
+            list.append(divList);
+            unorderList.append(list);
+            listDiv.append(unorderList);
+            imageDiv.append(listDiv);
+            containerDiv.append(imageDiv);
+            let contentBox = document.createElement("div");
+            contentBox.setAttribute("class", "apartment-details__content-box");
+            let header = document.createElement("h3");
+            header.setAttribute("class", "apartment-details__content-title");
+            header.textContent = details.title;
+            let para = document.createElement("p");
+            para.setAttribute("class", "apartment-details__text-1");
+            para.textContent = details.description;
+            let btn = document.createElement("button");
+            btn.classList.add("btn", "btn-danger");
+            btn.style.marginTop = "120px";
+            btn.style.marginLeft = "10px";
+            btn.textContent="Request";
+            btn.addEventListener("click", async function () {
+                try {
+                    let requestId = await getTentant();
+                    const payload = {
+                        tentantsId: requestId,
+                        contract: "pending",
+                        apartmentId: apartmentId
                     }
-                    const res = await fetch("http://localhost:8080/tentants/notification",{
-                        method:"POST",
-                        headers:{
-                            "Content-Type":"application/json"
+                    const res = await fetch("http://localhost:8080/tentants/notification", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
                         },
-                        body:JSON.stringify(payload)
+                        body: JSON.stringify(payload)
                     })
                     const data = await res.json();
-                    console.log("result of request",data.status)
-                    if(data.status === "failed"){
-                       alert(data.msg)
+                    console.log("request",data)
+                    if (data.status === "failed" && data.contract === "pending") {
+                        btn.textContent = data.contract;
+                        btn.disabled=true;
+                        alert(data.msg)
+                    } else if (data.contract === "completed" && data.status==="success") {
+                        btn.textContent = data.contract;
+                        btn.classList.add("btn","btn-success")
+                        btn.disabled = true;
+                        btn.style.display="none"
+                         let button2 = document.createElement("button");
+                         button2.classList.add("btn","btn-success")
+                         button2.textContent = "download pdf";
+                         button2.style.marginTop = "120px";
+                          button2.style.marginLeft = "10px";
+                          button2.addEventListener("click", downloadPdf)
+                         contentBox.appendChild(button2);
+                        alert(data.msg);
+                        load(); // Call load function after the button text changes
+                    }else{
+                         btn.textContent = "Request";
+                        btn.disabled=false;
                     }
-                    else if(data.status === "success"){
-                        setTimeout(()=>{
-                            if(data.newNotification.contract === "pending"){
-                                btn.textContent = data.newNotification.contract;
-                            }
-                        },2000)
-                        alert(data.newNotification.contract);
-                    }
-                    localStorage.setItem("requestForcontract","true");
-                  //  await load()
-                    // alert("request for contract")
-                    }catch(e){
-                        alert(e.message)
-                    }     
+                    localStorage.setItem("requestForcontract", JSON.stringify(data));
+                } catch (e) {
+                    alert(e)
+                }
+            });
 
-           })
-           contentBox.append(header,para,btn);
-           apartmentDetails.append(containerDiv,contentBox);
-        } 
+            async function getTentant() {
+                try {
+                    const res = await fetch("http://localhost:8080/tentants/read");
+                    const data = await res.json();
+                    let id = data.Tentant.find((item) => (item._id))
+                    return id;
+                } catch (e) {
+                    alert(e.msg)
+                }
+            }
+            // Call load function on HTML page load
+           
+            contentBox.append(header, para, btn);
+            apartmentDetails.append(containerDiv, contentBox);
+        }
     }
-        async function getTentant(){
-                        try{
-                            const res = await fetch("http://localhost:8080/tentants/read");
-                            const data = await res.json();
-                            let id = data.Tentant.find((item)=>(item._id))
-                            return id;
-                        }catch(e){
-                            alert(e.msg)
-                        }
-                    }
-//(async () => await load())();  
+    function load() {
+           let data =JSON.parse(localStorage.getItem("requestForcontract"));
+           console.log(data.contract)
+           if(data.contract === "pending" && data.status === "failed" ){
+            btn.textContent = data.contract;
+           }else{
+             btn.textContent = data.contract;
+            btn.classList.add("btn","btn-success")
+            btn.style.display="none"
+           }
+                   
+     };
+     function downloadPdf(){
+        alert("download contract and upload")
+     }
+window.onload = load();
 </script>
+
+
