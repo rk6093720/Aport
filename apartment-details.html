@@ -627,13 +627,14 @@
             btn.style.marginLeft = "10px";
             btn.textContent="Request";
             btn.addEventListener("click", async function () {
-                try {
-                    let requestId = await getTentant();
+                   let requestId = await getTentant();
+                    console.log(requestId)
                     const payload = {
-                        tentantsId: requestId,
+                        tentantsId: requestId._id,
                         contract: "pending",
                         apartmentId: apartmentId
                     }
+                try {
                     const res = await fetch("http://localhost:8080/tentants/notification", {
                         method: "POST",
                         headers: {
@@ -642,12 +643,8 @@
                         body: JSON.stringify(payload)
                     })
                     const data = await res.json();
-                    console.log("request",data.newNotification)
-                    if(data.newNotification.tentantsId === requestId._id && data.contract === "pending"){
-                        alert("user has already taken access of contract by admin");
-                        btn.disabled=true;
-                    }
-                    else if (data.status === "failed" && data.contract === "pending") {
+                    console.log("request",data)
+                     if (data.status === "failed" && data.contract === "pending") {
                         btn.textContent = data.contract;
                         btn.disabled=true;
                         alert(data.msg)
