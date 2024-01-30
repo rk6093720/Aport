@@ -566,7 +566,6 @@
     getApartmentDetails();
         const base = "http://localhost:8080/";
     let apartmentDetails = document.querySelector(".col-xl-12");
-
     async function displayApartment(details) {
         apartmentDetails.innerHTML = "";
         if (details) {
@@ -643,8 +642,12 @@
                         body: JSON.stringify(payload)
                     })
                     const data = await res.json();
-                    console.log("request",data)
-                    if (data.status === "failed" && data.contract === "pending") {
+                    console.log("request",data.newNotification)
+                    if(data.newNotification.tentantsId === requestId._id && data.contract === "pending"){
+                        alert("user has already taken access of contract by admin");
+                        btn.disabled=true;
+                    }
+                    else if (data.status === "failed" && data.contract === "pending") {
                         btn.textContent = data.contract;
                         btn.disabled=true;
                         alert(data.msg)
@@ -662,7 +665,13 @@
                          contentBox.appendChild(button2);
                         alert(data.msg);
                         load(); // Call load function after the button text changes
-                    }else{
+                    }else if(data.status === "success" && data.newNotification.contract === "pending"){
+                       btn.textContent= data.newNotification.contract
+                        btn.classList.add("btn","btn-danger")
+                        btn.disabled = true;
+                        alert(data.msg)
+                    }
+                    else{
                          btn.textContent = "Request";
                         btn.disabled=false;
                     }

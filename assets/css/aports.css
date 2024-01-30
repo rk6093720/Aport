@@ -4728,6 +4728,7 @@ ul {
   position: relative;
   display: block;
   padding: 0 0 90px;
+    border: 1px solid green;
 }
 
 .apartments-two .container {
@@ -4736,7 +4737,8 @@ ul {
 
 .apartments-two__single {
   position: relative;
-  display: block;
+  border: 1px solid red;
+  display: inline-block;
   margin-bottom: 30px;
 }
 
