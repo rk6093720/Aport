@@ -447,7 +447,7 @@ ul {
 # Navigations One
 --------------------------------------------------------------*/
 .main-header {
-  background: transparent;
+  background: white;
   position: absolute;
   left: 0px;
   top: 0px;
@@ -583,6 +583,7 @@ ul {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+  background-color: white;
 }
 
 .main-menu__left {
@@ -929,7 +930,7 @@ ul {
 
 @media (min-width: 1200px) {
   .mobile-nav__buttons {
-    display: none;
+    display: block;
   }
 }
 
@@ -1277,10 +1278,11 @@ ul {
 # Navigations Two
 --------------------------------------------------------------*/
 .main-header-two {
-  position: relative;
+  position: fixed;
   display: flex;
   width: 100%;
   transition: all 500ms ease;
+  background-color: white;
   z-index: 999;
 }
 
@@ -2905,7 +2907,7 @@ ul {
 
 .apartments-one__single {
   position: relative;
-  display: block;
+  display: flex;
   margin-bottom: 30px;
 }
 
@@ -4724,11 +4726,10 @@ ul {
 /*--------------------------------------------------------------
 # Apartments Two
 --------------------------------------------------------------*/
-.apartments-two {
+/* .apartments-two {
   position: relative;
   display: block;
   padding: 0 0 90px;
-    border: 1px solid green;
 }
 
 .apartments-two .container {
@@ -4737,16 +4738,16 @@ ul {
 
 .apartments-two__single {
   position: relative;
-  border: 1px solid red;
-  display: inline-block;
+  display: block;
   margin-bottom: 30px;
 }
 
 .apartments-two__img {
   position: relative;
-  display: block;
+  display: inline-block;
   overflow: hidden;
   z-index: 1;
+  
 }
 
 .apartments-two__img:before {
@@ -4838,6 +4839,102 @@ ul {
 .apartments-two__btn {
   font-size: 10px;
   padding: 1px 20px 1px;
+} */
+.apartments-two__single {
+  position: relative;
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.apartments-two__img {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  flex: 0 0 auto; /* Prevent image from growing */
+  width: 300px; /* Set width of the image container */
+}
+
+.apartments-two__img img {
+  width: 100%; /* Set image width to fill the container */
+  height: auto; /* Maintain aspect ratio */
+  transition: transform 500ms ease; /* Smooth transition */
+}
+
+.apartments-two__img:before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: "";
+  background-color: rgba(var(--aports-black-rgb), .50);
+  transform: perspective(400px) rotateX(90deg) scaleY(0.5);
+  transform-origin: center;
+  transition: all 0.5s ease-in-out;
+  z-index: 1;
+}
+
+.apartments-two__single:hover .apartments-two__img:before {
+  transform: perspective(400px) rotateX(0deg) scaleY(1.0);
+}
+
+.apartments-two__single:hover .apartments-two__img img {
+  transform: scale(1.05); /* Enlarge image on hover */
+}
+
+/* Additional styles for content */
+.apartments-two__content {
+  display: block;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px; /* Adjust padding as needed */
+  background-color: #ffffff;
+  box-shadow: 0px 10px 60px 0px rgba(0, 0, 0, 0.05);
+  flex: 1; /* Expand to fill available space */
+}
+
+.apartments-two__title {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 30px;
+  margin-bottom: 10px;
+  text-overflow: var(--bs-gutter-x);
+}
+
+.apartments-two__title a {
+  color: #000000;
+  transition: color 0.5s ease; /* Smooth color transition */
+}
+
+.apartments-two__title a:hover {
+  color: #ff0000; /* Change color on hover */
+}
+
+.apartments-two__tagline {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 14px;
+}
+
+.apartments-two__content-right {
+  align-self: flex-end; /* Align to bottom of container */
+}
+
+.apartments-two__btn {
+  margin-top: 15px;
+  font-size: 10px;
+  padding: 5px 25px;
+  background-color: #ff0000;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 5px;
+  width: 100%;
+  text-align: center;
+  transition: background-color 0.5s ease; /* Smooth background color transition */
+}
+
+.apartments-two__btn:hover {
+  background-color: #990000; /* Change background color on hover */
 }
 
 /*--------------------------------------------------------------
@@ -7504,7 +7601,7 @@ ul {
 --------------------------------------------------------------*/
 .apartments-page {
   position: relative;
-  display: block;
+  display: flex;
   padding: 120px 0 90px;
 }
 
