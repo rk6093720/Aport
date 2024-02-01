@@ -543,14 +543,36 @@
             btn.style.marginLeft = "10px";
             btn.textContent="Request";
             btn.addEventListener("click", async function () {
-                   let requestId = await getTentant();
+                const exist = await fetch("http://localhost:8080/tentants/notification/read",{
+                    method:"GET",
+                    headers:{
+                        "Content-Type":"application/json"
+                    }
+                })
+                
+                   const requestId = await getTentant();
                     console.log(requestId)
                     const payload = {
                         tentantsId: requestId._id,
                         contract: "pending",
                         apartmentId: apartmentId
                     }
-                try {
+                const getData = await exist.json();
+                 const approve  = getData.notification.map((item)=>{
+                    return item.contract
+                 })
+                const approveId =  getData.notification.map((item)=>{
+                  return   item.tentantsId.map((item,index)=>
+                    { return  item._id})
+                })
+                console.log(approve,approveId)
+                for(var i=0,j=0;i<approve.length && j<approveId.length;i++,j++){
+                   if(approve[i]==="completed" && approveId[i].toString() === requestId._id){
+                       btn.disabled=true;
+                       alert("User has already got contract sign from Admin")
+                   }
+                }
+                              try { 
                     const res = await fetch("http://localhost:8080/tentants/notification", {
                         method: "POST",
                         headers: {
