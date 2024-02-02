@@ -81,16 +81,16 @@
                                     <a href="contact.html">Contact</a>
                                 </li>
                                 <li class="dropdown">
-                                <a href="#"> MyProfile</a>
+                                <a href="#">Register</a>
                                       <ul class="shadow-box">
                                             <li><a  href="./signup.html">SignUp</a></li>
                                             <li><a  href="./login.html">Login</a></li>
-                                             <li >
+                                             <!-- <li >
                                                 <button type="button"  id="profile" style="width: 100%;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">profile</button>
-                                              </li>   
+                                              </li>    -->
                                              <li >
-                                             <div >
-                                              <span class="user-name"></span>
+                                               <div >
+                                                <span class="user-name"></span>
                                                  <button class="btn btn-danger">Logout</button>
                                                  </div>
                                                 </li>
@@ -102,13 +102,13 @@
                             </ul>
                         </div>
                        
-                        <div class="main-menu-two__right" >
+                        <!-- <div class="main-menu-two__right" >
                             <div class="main-menu-two__search-btn-box">
                                     <div class="main-menu-two__search-box">
                                         <a href="#" class="main-menu-two__search search-toggler icon-magnifying-glass"></a>
                                     </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </nav>
@@ -193,55 +193,6 @@
 
             </div>
         </section>
-        <!--Main Slider End-->
-
-        <!--About Two Start-->
-        <!-- <section class="about-two">
-            <div class="about-two-shape-1 float-bob-x">
-                <img src="assets/images/shapes/about-two-shape-1.png" alt="">
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-6">
-                        <div class="about-two__left">
-                            <div class="about-two__big-text">complex</div>
-                            <div class="about-two__img-box wow slideInLeft" data-wow-delay="100ms"
-                                data-wow-duration="2500ms">
-                                <div class="about-two__img-one">
-                                    <img src="https://media-s3-us-east-1.ceros.com/cn-live/images/2021/06/01/d5306a3fceda88b7f49db9d81dcf579e/image2.jpeg" alt="">
-                                </div>
-                                <div class="about-two__img-two">
-                                    <img src="https://media-s3-us-east-1.ceros.com/cn-live/images/2021/06/01/d5306a3fceda88b7f49db9d81dcf579e/image2.jpeg" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-6">
-                        <div class="about-two__right">
-                            <div class="section-title text-left">
-                                <span class="section-title__tagline">Get to know us</span>
-                                <h2 class="section-title__title">Modern & luxury living complexes</h2>
-                            </div>
-                            <p class="about-two__text-1">Duis irure dolor lipsum is simply free text available.</p>
-                            <p class="about-two__text-2">Interior of volumes, space, air, proportion, with certain light
-                                and mood. These interiors are meant to last forever. you need to be sure there isn't
-                                anything embarrassing hidden in the middle of text.</p>
-                            <p class="about-two__text-3">Thinking of selling or letting your property. You may just be
-                                interested to see how much your property is worth at the moment you can learn.</p>
-                            <div class="about-two__person">
-                                <div class="about-two__person-img">
-                                    <img src="https://www.pjstar.com/gcdn/authoring/2018/02/26/NJOS/ghows-IP-661fc59e-8c5a-0c45-e053-0100007fd0fa-57c280b2.jpeg" alt="">
-                                </div>
-                                <div class="about-two__person-content">
-                                    <h3 class="about-two__person-name">Kevin Smith</h3>
-                                    <p class="about-two__person-sub-title">Certified agent</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> -->
         <br>
               <!--Apartments Two Start-->
         <section class="apartments-two">
@@ -844,8 +795,17 @@
         document.querySelector(".main-menu__list  li a[href='./signup.html']").style.display = "none";
         document.querySelector(".main-menu__list  li a[href='./login.html']").style.display = "none";
         document.querySelector(".user-name").style.display = "inline-block";
-        document.querySelector(".btn.btn-danger").style.display = "inline-block";
-        
+        document.querySelector(".btn.btn-danger").style.display = "inline-block"; 
+        let list = document.createElement("li");
+        let button = document.createElement("button");
+        button.classList.add("btn","btn-light");
+        button.textContent="Profile";
+        button.style.width="100px";
+        button.style.fontSize="17px";
+        button.setAttribute("data-bs-toggle", "modal");
+        button.setAttribute("data-bs-target", "#exampleModal");
+        list.append(button);
+        document.querySelector(".main-menu__list").appendChild(list)
         // Add event listener for logout button
         document.querySelector(".btn.btn-danger").addEventListener("click", logout);
     } else {
@@ -857,17 +817,26 @@
 });
 
 function logout() {
-    localStorage.removeItem("token");
+         localStorage.removeItem("token");
     // Update the UI when logging out
     document.querySelector(".user-name").style.display = "none";
     document.querySelector(".btn.btn-danger").style.display = "none";
     document.querySelector(".main-menu__list  li a[href='./signup.html']").style.display = "inline-block";
     document.querySelector(".main-menu__list  li a[href='./login.html']").style.display = "inline-block";
+    alert("You are logout from web Application")
+    window.location.reload();
 }
-
+var token = JSON.parse(localStorage.getItem("token"));
+console.log(token)
     let apartmentData;
     async function getApartmentDetails(){
-        let data= await fetch("http://localhost:8080/apartment/read");
+        let data= await fetch("http://localhost:8080/apartment/read",{
+            method:"GET",
+            headers:{
+                "Content-Type":"application/json",
+                Authorization:`Bearer${token.token}`
+            }
+        });
         let res = await data.json();
         apartmentData =res.data.getData;
         displayApartment(apartmentData)

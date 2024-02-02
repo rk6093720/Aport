@@ -602,6 +602,7 @@ ul {
 .main-menu__main-menu-box {
   position: relative;
   display: block;
+  color: black;
 }
 
 .main-menu__right {
