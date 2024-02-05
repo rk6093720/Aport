@@ -424,9 +424,17 @@
 </body>
 </html>
 <script>
+    var token = JSON.parse(localStorage.getItem("token"));
+console.log(token.token)
      let apartmentData;
     async function getApartmentDetails(){
-        let data= await fetch("http://localhost:8080/apartment/read");
+        let data= await fetch("http://localhost:8080/apartment/read",{
+               method:"GET",
+            headers:{
+                Authorization:`Bearer ${token.token}`,
+                 "Content-Type":"application/json",
+            }
+        });
         let res = await data.json();
         apartmentData =res.data.getData;
         displayApartment(apartmentData)

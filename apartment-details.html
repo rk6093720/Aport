@@ -521,8 +521,16 @@
     var btn = document.querySelector(".button");
     btn.classList.add("btn","btn-danger")
     let details;
+    var token = JSON.parse(localStorage.getItem("token"));
+     console.log(token.token)
        async function getApartmentDetails() {
-        let data = await fetch("http://localhost:8080/apartment/read");
+        let data = await fetch("http://localhost:8080/apartment/read",{
+               method:"GET",
+               headers:{
+                Authorization:`Bearer ${token.token}`,
+                 "Content-Type":"application/json",
+            } 
+        });
         let res = await data.json();
         let apartmentData = res.data.getData;
         details = apartmentData.find((item) => item._id === apartmentId);
@@ -619,6 +627,7 @@
                 const res = await fetch("http://localhost:8080/tentants/notification", {
                         method: "POST",
                         headers: {
+                        //    Authorization:`Bearer ${token.token}`,
                             "Content-Type": "application/json"
                         },
                         body: JSON.stringify(payload)
@@ -646,13 +655,21 @@
                         btn.classList.add("btn","btn-success")
                         btn.disabled = true;
                         btn.style.display="none"
+                        let profile = document.createElement("button");
+                        profile.classList.add("btn","btn-light");
+                        profile.textContent="Profile";
+                        profile.style.width="100px";
+                        profile.style.fontSize="17px";
+                        profile.setAttribute("data-bs-toggle", "modal");
+                        profile.setAttribute("data-bs-target", "#exampleModal");
+        
                          let button2 = document.createElement("button");
                          button2.classList.add("btn","btn-success")
                          button2.textContent = "download pdf";
                          button2.style.marginTop = "120px";
                           button2.style.marginLeft = "10px";
                           button2.addEventListener("click", downloadPdf)
-                         contentBox.appendChild(button2);
+                         contentBox.appendChild(button2,profile);
                         alert(data.msg);
                         load(); // Call load function after the button text changes
                     }else if(data.status === "success" && data.newNotification.contract === "pending"){

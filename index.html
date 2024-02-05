@@ -80,6 +80,9 @@
                                 <li >
                                     <a href="contact.html">Contact</a>
                                 </li>
+                                 <li >
+                                    <a href="Blog.html">Blo</a>
+                                </li>
                                 <li class="dropdown">
                                 <a href="#">Register</a>
                                       <ul class="shadow-box">
@@ -796,7 +799,7 @@
         document.querySelector(".main-menu__list  li a[href='./login.html']").style.display = "none";
         document.querySelector(".user-name").style.display = "inline-block";
         document.querySelector(".btn.btn-danger").style.display = "inline-block"; 
-        let list = document.createElement("li");
+     /*   let list = document.createElement("li");
         let button = document.createElement("button");
         button.classList.add("btn","btn-light");
         button.textContent="Profile";
@@ -806,6 +809,7 @@
         button.setAttribute("data-bs-target", "#exampleModal");
         list.append(button);
         document.querySelector(".main-menu__list").appendChild(list)
+        */
         // Add event listener for logout button
         document.querySelector(".btn.btn-danger").addEventListener("click", logout);
     } else {
@@ -827,14 +831,14 @@ function logout() {
     window.location.reload();
 }
 var token = JSON.parse(localStorage.getItem("token"));
-console.log(token)
+console.log(token.token)
     let apartmentData;
     async function getApartmentDetails(){
         let data= await fetch("http://localhost:8080/apartment/read",{
             method:"GET",
             headers:{
-                "Content-Type":"application/json",
-                Authorization:`Bearer${token.token}`
+                Authorization:`Bearer ${token.token}`,
+                 "Content-Type":"application/json",
             }
         });
         let res = await data.json();
