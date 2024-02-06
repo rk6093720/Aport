@@ -81,7 +81,7 @@
                                     <a href="contact.html">Contact</a>
                                 </li>
                                  <li >
-                                    <a href="Blog.html">Blo</a>
+                                    <a href="Blog.html">Blog</a>
                                 </li>
                                 <li class="dropdown">
                                 <a href="#">Register</a>
@@ -819,7 +819,10 @@
         document.querySelector(".btn.btn-danger").style.display = "none";
     }
 });
-
+var token = JSON.parse(localStorage.getItem("token"));
+console.log(token.token,token.expire)
+if(token.expire){
+setTimeout(()=>{
 function logout() {
          localStorage.removeItem("token");
     // Update the UI when logging out
@@ -830,8 +833,19 @@ function logout() {
     alert("You are logout from web Application")
     window.location.reload();
 }
-var token = JSON.parse(localStorage.getItem("token"));
-console.log(token.token)
+},token.expire)
+}else{
+    function logout() {
+         localStorage.removeItem("token");
+    // Update the UI when logging out
+    document.querySelector(".user-name").style.display = "none";
+    document.querySelector(".btn.btn-danger").style.display = "none";
+    document.querySelector(".main-menu__list  li a[href='./signup.html']").style.display = "inline-block";
+    document.querySelector(".main-menu__list  li a[href='./login.html']").style.display = "inline-block";
+    alert("You are logout from web Application")
+    window.location.reload();
+}
+}
     let apartmentData;
     async function getApartmentDetails(){
         let data= await fetch("http://localhost:8080/apartment/read",{

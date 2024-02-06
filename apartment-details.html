@@ -522,7 +522,7 @@
     btn.classList.add("btn","btn-danger")
     let details;
     var token = JSON.parse(localStorage.getItem("token"));
-     console.log(token.token)
+     console.log(token.token.expire)
        async function getApartmentDetails() {
         let data = await fetch("http://localhost:8080/apartment/read",{
                method:"GET",
@@ -607,14 +607,7 @@
                         "Content-Type":"application/json"
                     }
                 })
-                
-                   const requestId = await getTentant();
                   //  console.log(requestId)
-                    const payload = {
-                        tentantsId: requestId._id,
-                        contract: "pending",
-                        apartmentId: apartmentId
-                    }
                 const getData = await exist.json();
                  const approve  = getData.notification.map((item)=>{
                     return item.contract
@@ -624,10 +617,15 @@
                     { return  item._id})
                 })
                // console.log(approve,approveId)
+                const requestId = await getTentant();
+                 const payload = {
+                        tentantsId: requestId._id,
+                        contract: "pending",
+                        apartmentId: apartmentId
+                    }
                 const res = await fetch("http://localhost:8080/tentants/notification", {
                         method: "POST",
                         headers: {
-                        //    Authorization:`Bearer ${token.token}`,
                             "Content-Type": "application/json"
                         },
                         body: JSON.stringify(payload)
