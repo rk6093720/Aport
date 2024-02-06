@@ -789,6 +789,7 @@
 </body>
 </html>
 <script>
+    
   document.addEventListener("DOMContentLoaded", function () {
     // Check if the user is logged in
     var token = JSON.parse(localStorage.getItem("token"));
@@ -811,6 +812,7 @@
         document.querySelector(".main-menu__list").appendChild(list)
         */
         // Add event listener for logout button
+        logoutTime(token.expire);
         document.querySelector(".btn.btn-danger").addEventListener("click", logout);
     } else {
         // User is not logged in
@@ -819,33 +821,23 @@
         document.querySelector(".btn.btn-danger").style.display = "none";
     }
 });
-var token = JSON.parse(localStorage.getItem("token"));
-console.log(token.token,token.expire)
-if(token.expire){
-setTimeout(()=>{
-function logout() {
-         localStorage.removeItem("token");
-    // Update the UI when logging out
-    document.querySelector(".user-name").style.display = "none";
-    document.querySelector(".btn.btn-danger").style.display = "none";
-    document.querySelector(".main-menu__list  li a[href='./signup.html']").style.display = "inline-block";
-    document.querySelector(".main-menu__list  li a[href='./login.html']").style.display = "inline-block";
-    alert("You are logout from web Application")
-    window.location.reload();
+
+//console.log(token.token,token.expire)
+function logoutTime(expire){
+    const remainTime = Math.floor(expire - Date.now)
+    console.log(remainTime)
+    setTimeout(logout,remainTime);
 }
-},token.expire)
-}else{
     function logout() {
-         localStorage.removeItem("token");
+              localStorage.removeItem("token");
     // Update the UI when logging out
     document.querySelector(".user-name").style.display = "none";
     document.querySelector(".btn.btn-danger").style.display = "none";
     document.querySelector(".main-menu__list  li a[href='./signup.html']").style.display = "inline-block";
     document.querySelector(".main-menu__list  li a[href='./login.html']").style.display = "inline-block";
-    alert("You are logout from web Application")
-    window.location.reload();
+    alert("You have been logged out due to session expiry")
 }
-}
+
     let apartmentData;
     async function getApartmentDetails(){
         let data= await fetch("http://localhost:8080/apartment/read",{

@@ -601,22 +601,6 @@
             btn.textContent="Request";
             btn.addEventListener("click", async function () {
                  try { 
-                const exist = await fetch("http://localhost:8080/tentants/notification/read",{
-                    method:"GET",
-                    headers:{
-                        "Content-Type":"application/json"
-                    }
-                })
-                  //  console.log(requestId)
-                const getData = await exist.json();
-                 const approve  = getData.notification.map((item)=>{
-                    return item.contract
-                 })
-                const approveId =  getData.notification.map((item)=>{
-                  return   item.tentantsId.map((item,index)=>
-                    { return  item._id})
-                })
-               // console.log(approve,approveId)
                 const requestId = await getTentant();
                  const payload = {
                         tentantsId: requestId._id,
@@ -631,7 +615,7 @@
                         body: JSON.stringify(payload)
                     })
                     const data = await res.json();
-                     let completedContractFound = false;
+                /*     let completedContractFound = false;
                 for(var i=0;i<approve.length;i++){
                    if(approve[i]==="completed" && approveId[i].toString() === requestId._id){
                        btn.disabled=true;
@@ -641,7 +625,7 @@
                    }
 
                 }
-                if(completedContractFound){
+                */
                     //console.log("request",data)
                      if (data.status === "failed" && data.contract === "pending") {
                         btn.textContent = data.contract;
@@ -680,7 +664,6 @@
                          btn.textContent = "Request";
                         btn.disabled=false;
                     }
-                }
                     localStorage.setItem("requestForcontract", JSON.stringify(data));
                 } catch (e) {
                     alert(e)
