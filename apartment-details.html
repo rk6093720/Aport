@@ -435,83 +435,121 @@
     <script src="assets/vendors/circleType/jquery.lettering.min.js"></script>
     <!-- template js -->
     <script src="assets/js/aports.js"></script>
-    <div class="modal fade" id="myModal" style="width: 1200;" data-backdrop="false">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-              <h4 class="modal-title">Add User</h4>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-                <form action="">
-                    <div class="row g-3">
+   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add User</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form id="my-form"  novalidate="novalidate">
+      <div class="modal-body">
+                   <div class="row g-3">
                         <div class="col">
                             <label for="Firstname">Firstname</label>
-                          <input type="text" class="form-control" placeholder="Firstname" aria-label="First name">
+                          <input id="firstName" type="text" class="form-control" placeholder="Firstname" name="firstName" aria-label="First name">
                         </div>
                         <div class="col">
                             <label for="Lastname">LastName</label>
-                          <input type="text" class="form-control" placeholder="Lastname" aria-label="Lastname">
+                          <input id="lastName" type="text" class="form-control" placeholder="Lastname" aria-label="Lastname">
                         </div>
-                      </div>
-                      <br>
-                      <div class="row g-3">
+                    </div>
+                    <div class="row g-3">
                         <div class="col">
                             <label for="email">Email</label>
-                          <input type="email" class="form-control" placeholder="email" aria-label="email">
+                          <input  id="email" type="email" class="form-control" placeholder="email" aria-label="email">
                         </div>
                         <div class="col">
                             <label for="phone">Phone</label>
-                          <input type="text" class="form-control" c placeholder="phone" maxlength="10" aria-label="phone">
+                          <input id="phone" type="text" class="form-control" c placeholder="phone" maxlength="10" aria-label="phone">
                         </div>
-                      </div>
-                      <br>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col">
+                            <label for="AadharCard">AadharCard</label>
+                          <input id="aadharCard" type="file" name="aadharCard" accept="application/pdf" class="form-control" placeholder="AadharCard" aria-label="AadharCard" aria-required="true">
+                        </div>
+                        <!-- <div class="col">
+                            <label for="PanCard">PanCard</label>
+                          <input id="panCard" type="file" name="panCard" accept="application/pdf" class="form-control" placeholder="panCard" aria-label="panCard" aria-required="true">
+                        </div> -->
+                    </div>
+                    <div class="row g-3">
+                        <div class="col">
+                            <label for="Date-of-birth">Date-of-birth</label>
+                          <input id="dateOfBirth" type="date" class="form-control" placeholder="dob" aria-label="date" aria-placeholder="date-of-birth">
+                        </div>
+                        <div class="col">
+                            <label for="city">Registration</label>
+                          <input id="registrationofRoomRent" type="date" class="form-control"  placeholder="Registration-of-date" aria-label="Registration-of-date">
+                        </div>
+                    </div>
+                     <div class="row g-3">
+                        <p>Residental Address</p>
+                        <div class="col">
+                            <label for="street">street</label>
+                          <input id="Residentalstreet" type="text" name="street"  class="form-control" placeholder="street" aria-label="AadharCard" aria-required="true">
+                        </div>
+                        <div class="col">
+                            <label for="city">city</label>
+                          <input id="Residentalcity" type="text" name="city"  class="form-control" placeholder="city" aria-label="panCard" aria-required="true">
+                        </div>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col">
+                            <label for="state">state</label>
+                          <input id="Residentalstate" type="text" name="state" class="form-control" placeholder="state" aria-label="state" aria-placeholder="state">
+                        </div>
+                        <div class="col">
+                            <label for="country">country</label>
+                          <input id="Residentalcountry" type="text" name="country" class="form-control"  placeholder="country" aria-label="country">
+                        </div>
+                        <div class="col">
+                            <label for="postalCode">postalCode</label>
+                          <input id="ResidentalzipCode" type="text" class="form-control" name="pincode"  placeholder="postalCode" aria-label="postalCode">
+                        </div>
+                    </div>
+                    <div class="form-check">
+                    <input class="form-check-input" name="formcheckinput" type="checkbox" onclick="formSubmit(this.form)" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Same Address
+                    </label>
+                    </div>
                       <div class="row g-3">
+                        <p>currentAddress</p>
                         <div class="col">
-                            <label for="contract">Contract</label>
-                          <input type="file" class="form-control" placeholder="email" aria-label="email">
+                            <label for="street">street</label>
+                          <input id="Currentstreet" type="text" name="currentstreet"  class="form-control" placeholder="street" aria-label="AadharCard" aria-required="true">
                         </div>
                         <div class="col">
-                            <label for="address">Address</label>
-                          <input type="text" class="form-control" c placeholder="address" aria-label="address">
+                            <label for="city">city</label>
+                          <input id="Currentcity" type="text" name="currentcity"  class="form-control" placeholder="city" aria-label="panCard" aria-required="true">
                         </div>
-                      </div>
-                      <br>
-                      <div class="row g-3">
+                    </div>
+                    <div class="row g-3">
                         <div class="col">
-                            <label for="state">State</label>
-                          <input type="text" class="form-control" placeholder="state" aria-label="state">
-                        </div>
-                        <div class="col">
-                            <label for="city">City</label>
-                          <input type="text" class="form-control" c placeholder="city" aria-label="city">
-                        </div>
-                      </div>
-                      <br>
-                      <div class="row g-3">
-                        <div class="col">
-                            <label for="pincode">pincode</label>
-                          <input type="text" maxlength="6" class="form-control" placeholder="pincode" aria-label="pincode">
+                            <label for="state">state</label>
+                          <input id="Currentstate" type="text" name="currentstate" class="form-control" placeholder="state" aria-label="state" aria-placeholder="state">
                         </div>
                         <div class="col">
-                            <label for="adharcard">adharcard</label>
-                          <input type="text" maxlength="12" class="form-control" c placeholder="adharcard" aria-label="adharcard">
+                            <label for="country">country</label>
+                          <input id="Currentcountry" type="text" name="currentcountry" class="form-control"  placeholder="country" aria-label="country">
                         </div>
-                      </div>
-                </form>
-            </div>
+                        <div class="col">
+                            <label for="postalCode">postalCode</label>
+                          <input id="CurrentzipCode"  type="text" name="currentpincode" class="form-control"  placeholder="postalCode" aria-label="postalCode">
+                        </div>
+                    </div
 
-            <!-- Modal footer -->
-            <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">Close</button>
-              <button type="button" class="btn btn-primary">Submit And Save</button>
-            </div>
-      
-          </div>
-        </div>
-      </div>    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Create An Account</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>   
 </body>
 </html>
 <script>
@@ -522,7 +560,7 @@
     btn.classList.add("btn","btn-danger")
     let details;
     var token = JSON.parse(localStorage.getItem("token"));
-     console.log(token.token.expire)
+     console.log(token.token)
        async function getApartmentDetails() {
         let data = await fetch("http://localhost:8080/apartment/read",{
                method:"GET",
@@ -596,7 +634,7 @@
             para.textContent = details.description;
             let btn = document.createElement("button");
             btn.classList.add("btn", "btn-danger");
-            btn.style.marginTop = "120px";
+            btn.style.marginTop = "20px";
             btn.style.marginLeft = "10px";
             btn.textContent="Request";
             btn.addEventListener("click", async function () {
@@ -615,18 +653,6 @@
                         body: JSON.stringify(payload)
                     })
                     const data = await res.json();
-                /*     let completedContractFound = false;
-                for(var i=0;i<approve.length;i++){
-                   if(approve[i]==="completed" && approveId[i].toString() === requestId._id){
-                       btn.disabled=true;
-                       alert("User has already got contract sign from Admin");
-                         completedContractFound = true;
-                          break;
-                   }
-
-                }
-                */
-                    //console.log("request",data)
                      if (data.status === "failed" && data.contract === "pending") {
                         btn.textContent = data.contract;
                         btn.disabled=true;
@@ -637,21 +663,22 @@
                         btn.classList.add("btn","btn-success")
                         btn.disabled = true;
                         btn.style.display="none"
-                        let profile = document.createElement("button");
-                        profile.classList.add("btn","btn-light");
-                        profile.textContent="Profile";
-                        profile.style.width="100px";
-                        profile.style.fontSize="17px";
-                        profile.setAttribute("data-bs-toggle", "modal");
-                        profile.setAttribute("data-bs-target", "#exampleModal");
-        
                          let button2 = document.createElement("button");
                          button2.classList.add("btn","btn-success")
                          button2.textContent = "download pdf";
-                         button2.style.marginTop = "120px";
+                         button2.style.marginTop = "20px";
                           button2.style.marginLeft = "10px";
-                          button2.addEventListener("click", downloadPdf)
-                         contentBox.appendChild(button2,profile);
+                          button2.addEventListener("click", downloadPdf);
+                             let profile = document.createElement("button");
+                        profile.classList.add("btn","btn-primary");
+                        profile.textContent="Profile";
+                        profile.style.width="120px";
+                        profile.style.marginTop = "20px";
+                        profile.style.marginLeft = "10px";
+                        profile.setAttribute("data-bs-toggle", "modal");
+                        profile.setAttribute("data-bs-target", "#exampleModal");
+                        contentBox.appendChild(profile)
+                         contentBox.appendChild(button2);
                         alert(data.msg);
                         load(); // Call load function after the button text changes
                     }else if(data.status === "success" && data.newNotification.contract === "pending"){
@@ -672,7 +699,13 @@
 
             async function getTentant() {
                 try {
-                    const res = await fetch("http://localhost:8080/tentants/read");
+                    const res = await fetch("http://localhost:8080/tentants/read",{
+                        method:"GET",
+                        headers:{
+                             Authorization:`Bearer ${token.token}`,
+                             "Content-Type":"application/json"
+                        }
+                    });
                     const data = await res.json();
                     let id = data.Tentant.find((item) => (item._id))
                     return id;
@@ -698,6 +731,82 @@
            }
                    
      };
+     document.getElementById("my-form").addEventListener("submit", AddUser);
+async function AddUser(e) {
+    e.preventDefault();
+    let firstName = document.getElementById("firstName").value;
+    let lastName = document.getElementById("lastName").value;
+    let email = document.getElementById("email").value;
+    let phone = document.getElementById("phone").value;
+    let aadharCard = document.getElementById("aadharCard").files[0];
+    let panCard = document.getElementById("panCard").files[0];
+    let residentalAddress = {
+        street: document.getElementById("Residentalstreet").value,
+        city: document.getElementById("Residentalcity").value,
+        state: document.getElementById("Residentalstate").value,
+        country: document.getElementById("Residentalcountry").value,
+        zipCode: document.getElementById("ResidentalzipCode").value
+    };
+    let currentAddress = {
+        street: document.querySelector("#Currentstreet").value,
+        city: document.querySelector("#Currentcity").value,
+        state: document.querySelector("#Currentstate").value,
+        country: document.querySelector("#Currentcountry").value,
+        zipCode: document.querySelector("#CurrentzipCode").value
+    };
+    let formData = new FormData();
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("aadharCard", aadharCard);
+    formData.append("panCard", panCard);
+    formData.append("residentalAddress[street]", residentalAddress.street);
+    formData.append("residentalAddress[city]", residentalAddress.city);
+    formData.append("residentalAddress[state]", residentalAddress.state);
+    formData.append("residentalAddress[country]", residentalAddress.country);
+    formData.append("residentalAddress[zipCode]", residentalAddress.zipCode);
+
+    formData.append("currentAddress[street]", currentAddress.street);
+    formData.append("currentAddress[city]", currentAddress.city);
+    formData.append("currentAddress[state]", currentAddress.state);
+    formData.append("currentAddress[country]", currentAddress.country);
+    formData.append("currentAddress[zipCode]", currentAddress.zipCode);
+    try {
+       const res = await fetch("http://localhost:8080/tentants/create",{
+        method:"POST",
+        headers:{
+             Authorization:`Bearer ${token.token}`,
+             "Content-Type":"application/json"
+        },
+        body:formData
+       });
+       const data = await res.json();
+       console.log(data)
+        if(data.message === "User already exists"){
+           alert(data.message)
+        }else {
+            alert(data.msg)
+        }
+    } catch (e) {
+        alert(e.message);
+    }
+}
+function formSubmit(f){
+    if(f.formcheckinput.checked === true){
+        f.currentstreet.value =f.street.value;
+        f.currentcity.value =f.city.value;
+        f.currentstate.value =f.state.value;
+        f.currentcountry.value =f.country.value;
+        f.currentpincode.value =f.pincode.value;
+    }else{
+        f.currentstreet.value ="";
+        f.currentcity.value ="";
+        f.currentstate.value ="";
+        f.currentcountry.value ="";
+        f.currentpincode.value ="";
+    }
+}
      async function downloadPdf(){
         try{
              const res = await fetch("http://localhost:8080/landlord/read",{
@@ -715,7 +824,9 @@
         a.download = `${base + contractPdf.toString()}`;
         a.style.display="none";
         document.body.appendChild(a);
-        a.click();
+        setTimeout(()=>{
+            a.click();
+        },2000)
         document.body.removeChild(a);
         alert("pdf is download successfully")
         }catch(e){

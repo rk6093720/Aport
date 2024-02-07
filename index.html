@@ -671,7 +671,7 @@
     <!-- Button trigger modal -->
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -785,11 +785,16 @@
       </form>
     </div>
   </div>
-</div>
+</div> -->
 </body>
 </html>
 <script>
-    
+var token = JSON.parse(localStorage.getItem("token"));
+  if (token && token.token) {
+        var expire = token.expire;
+        tokenExpire(expire);
+    }
+
   document.addEventListener("DOMContentLoaded", function () {
     // Check if the user is logged in
     var token = JSON.parse(localStorage.getItem("token"));
@@ -812,8 +817,15 @@
         document.querySelector(".main-menu__list").appendChild(list)
         */
         // Add event listener for logout button
-        logoutTime(token.expire);
-        document.querySelector(".btn.btn-danger").addEventListener("click", logout);
+        document.querySelector(".btn.btn-danger").addEventListener("click", function(){
+                 localStorage.removeItem("token");
+    // Update the UI when logging out
+    document.querySelector(".user-name").style.display = "none";
+    document.querySelector(".btn.btn-danger").style.display = "none";
+    document.querySelector(".main-menu__list  li a[href='./signup.html']").style.display = "inline-block";
+    document.querySelector(".main-menu__list  li a[href='./login.html']").style.display = "inline-block";
+    alert("You have been logged out due to session expiry")
+        });
     } else {
         // User is not logged in
         // Show the login-related elements
@@ -822,12 +834,6 @@
     }
 });
 
-//console.log(token.token,token.expire)
-function logoutTime(expire){
-    const remainTime = Math.floor(expire - Date.now)
-    console.log(remainTime)
-    setTimeout(logout,remainTime);
-}
     function logout() {
               localStorage.removeItem("token");
     // Update the UI when logging out
@@ -888,77 +894,26 @@ function logoutTime(expire){
             apartment.append(div,ContentDiv)
         })
     }
-// adding profile of user's functionality
-document.getElementById("my-form").addEventListener("submit", AddUser);
-async function AddUser(e) {
-    e.preventDefault();
-    let firstName = document.getElementById("firstName").value;
-    let lastName = document.getElementById("lastName").value;
-    let email = document.getElementById("email").value;
-    let phone = document.getElementById("phone").value;
-    let aadharCard = document.getElementById("aadharCard").files[0];
-    let panCard = document.getElementById("panCard").files[0];
-    let residentalAddress = {
-        street: document.getElementById("Residentalstreet").value,
-        city: document.getElementById("Residentalcity").value,
-        state: document.getElementById("Residentalstate").value,
-        country: document.getElementById("Residentalcountry").value,
-        zipCode: document.getElementById("ResidentalzipCode").value
-    };
-    let currentAddress = {
-        street: document.querySelector("#Currentstreet").value,
-        city: document.querySelector("#Currentcity").value,
-        state: document.querySelector("#Currentstate").value,
-        country: document.querySelector("#Currentcountry").value,
-        zipCode: document.querySelector("#CurrentzipCode").value
-    };
-    let formData = new FormData();
-    formData.append("firstName", firstName);
-    formData.append("lastName", lastName);
-    formData.append("email", email);
-    formData.append("phone", phone);
-    formData.append("aadharCard", aadharCard);
-    formData.append("panCard", panCard);
-    formData.append("residentalAddress[street]", residentalAddress.street);
-    formData.append("residentalAddress[city]", residentalAddress.city);
-    formData.append("residentalAddress[state]", residentalAddress.state);
-    formData.append("residentalAddress[country]", residentalAddress.country);
-    formData.append("residentalAddress[zipCode]", residentalAddress.zipCode);
+function tokenExpire(expire) {
+    const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
+    const expirationTimeSeconds = expire - currentTime; // Convert to seconds
 
-    formData.append("currentAddress[street]", currentAddress.street);
-    formData.append("currentAddress[city]", currentAddress.city);
-    formData.append("currentAddress[state]", currentAddress.state);
-    formData.append("currentAddress[country]", currentAddress.country);
-    formData.append("currentAddress[zipCode]", currentAddress.zipCode);
-    try {
-       const res = await fetch("http://localhost:8080/tentants/create",{
-        method:"POST",
-        body:formData
-       });
-       const data = await res.json();
-       console.log(data)
-        if(data.message === "User already exists"){
-           alert(data.message)
-        }else {
-            alert(data.msg)
-        }
-    } catch (e) {
-        alert(e.message);
-    }
-}
-function formSubmit(f){
-    if(f.formcheckinput.checked === true){
-        f.currentstreet.value =f.street.value;
-        f.currentcity.value =f.city.value;
-        f.currentstate.value =f.state.value;
-        f.currentcountry.value =f.country.value;
-        f.currentpincode.value =f.pincode.value;
-    }else{
-        f.currentstreet.value ="";
-        f.currentcity.value ="";
-        f.currentstate.value ="";
-        f.currentcountry.value ="";
-        f.currentpincode.value ="";
+    // Calculate hours, minutes, and seconds
+    const hours = Math.floor(expirationTimeSeconds / 3600);
+    const remainingSeconds = expirationTimeSeconds % 3600;
+    const minutes = Math.floor(remainingSeconds / 60);
+    const seconds = remainingSeconds % 60;
+    console.log(hours,minutes,seconds)
+    // Format the expiration time
+    const formattedExpirationTime = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+    
+    console.log(formattedExpirationTime);
+    if(hours <= 0 && minutes <= 0 && seconds <= 0){
+        alert("token is expire")
+        document.querySelector(".btn.btn-danger").addEventListener("click",
+        setTimeout(()=>{
+         logout()
+        },1000) );
     }
 }
 
