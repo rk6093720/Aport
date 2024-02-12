@@ -208,6 +208,13 @@
         <option value="2">Two</option>
         <option value="3">Three</option>
         </select>
+        <br>
+        <select class="form-select"  aria-label="Default select example">
+        <option selected>Sorting based on their name of Apartment</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+        </select>
         <!--Page Header End-->
         <!--Apartments Page Start-->
         <section class="apartments-page">
@@ -237,24 +244,12 @@
         </section>
         <!--Apartments Page End-->
         <br>
-        <nav aria-label="Page navigation example">
+          <nav aria-label="Page navigation example">
             <ul class="pagination">
-                <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-                </li>
+
             </ul>
             </nav>
-<br>
+          <br>
         <!--Site Footer Start-->
         <footer class="site-footer">
             <div class="site-footer__top">
@@ -352,11 +347,7 @@
             </div>
         </footer>
         <!--Site Footer End-->
-
-
     </div><!-- /.page-wrapper -->
-
-
     <div class="mobile-nav__wrapper">
         <div class="mobile-nav__overlay mobile-nav__toggler"></div>
         <!-- /.mobile-nav__overlay -->
@@ -370,7 +361,6 @@
             <!-- /.logo-box -->
             <div class="mobile-nav__container"></div>
             <!-- /.mobile-nav__container -->
-
             <ul class="mobile-nav__contact list-unstyled">
                 <li>
                     <i class="fa fa-envelope"></i>
@@ -389,14 +379,10 @@
                     <a href="#" class="fab fa-instagram"></a>
                 </div><!-- /.mobile-nav__social -->
             </div><!-- /.mobile-nav__top -->
-
-
-
         </div>
         <!-- /.mobile-nav__content -->
     </div>
     <!-- /.mobile-nav__wrapper -->
-
     <div class="search-popup">
         <div class="search-popup__overlay search-toggler"></div>
         <!-- /.search-popup__overlay -->
@@ -412,9 +398,7 @@
         <!-- /.search-popup__content -->
     </div>
     <!-- /.search-popup -->
-
     <a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="icon-right-arrow"></i></a>
-
     <script src="assets/vendors/jquery/jquery-3.6.0.min.js"></script>
     <script src="assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assets/vendors/jarallax/jarallax.min.js"></script>
@@ -439,37 +423,19 @@
     <script src="assets/vendors/timepicker/timePicker.js"></script>
     <script src="assets/vendors/circleType/jquery.circleType.js"></script>
     <script src="assets/vendors/circleType/jquery.lettering.min.js"></script>
-
-
-
-
     <!-- template js -->
     <script src="assets/js/aports.js"></script>
 </body>
 </html>
 <script>
     var token = JSON.parse(localStorage.getItem("token"));
-console.log(token.token)
-     let apartmentData;
-    async function getApartmentDetails(){
-        let data= await fetch("http://localhost:8080/apartment/read",{
-               method:"GET",
-            headers:{
-                Authorization:`Bearer ${token.token}`,
-                 "Content-Type":"application/json",
-            }
-        });
-        let res = await data.json();
-        apartmentData =res.data.getData;
-        displayApartment(apartmentData)
-    }
-    getApartmentDetails();
+    console.log(token.token)   
     const base = "http://localhost:8080/";
     let apartment = document.querySelector(".apartments-two__single");
     function displayApartment(data){
         apartment.innerHTML="";
         data.map((ele)=>{
-            console.log(ele,ele._id);
+           // console.log(ele,ele._id);
             let div = document.createElement("div");
             div.setAttribute("class","apartments-two__img");
             let img = document.createElement("img");
@@ -500,4 +466,69 @@ console.log(token.token)
             apartment.append(div,ContentDiv)
         })
     }
+        let page =1;
+    let limit = 10;
+  async function pagination(page){
+        let data = await fetch(`http://localhost:8080/apartment/filter?page=${page}&limit=${limit}`,{
+                 method:"GET",
+            headers:{
+                Authorization:`Bearer ${token.token}`,
+                 "Content-Type":"application/json",
+            }
+        })
+        let res = await data.json();
+        console.log(res.results, res.paginationInfo)
+        displayApartment(res.results)
+        updatePagination(res.paginationInfo)
+    }
+ 
+    let container = document.getElementById("pagination");
+    function updatePagination(total){
+        container.innerHTML="";
+        const {page,totalPages,limit,totalRecords}=total;
+        //console.log(totalPages)
+        for(let i=0;i<totalPages;i++){
+        const list = document.createElement("li");
+        list.classList.add("page-item");
+        let previous = document.createElement("a");
+        previous.classList.add("page-link");
+        previous.href = "#";
+        previous.setAttribute("aria-label", "Previous");
+        previous.innerHTML = "&laquo;";
+        let index = document.createElement("a");
+        index.classList.add("page-link");
+        index.href = "#";
+        index.textContent = i + 1;
+        let next = document.createElement("a");
+        next.classList.add("page-link");
+        next.href = "#";
+        next.setAttribute("aria-label", "Next");
+        next.innerHTML = "&raquo;";
+        list.appendChild(previous);
+        list.appendChild(index);
+        list.appendChild(next);
+        container.appendChild(list);
+
+        }
+    }
+ pagination(page)
+
+
+
+   /*  let apartmentData;
+    async function getApartmentDetails(){
+        let data= await fetch("http://localhost:8080/apartment/read",{
+               method:"GET",
+            headers:{
+                Authorization:`Bearer ${token.token}`,
+                 "Content-Type":"application/json",
+            }
+        });
+        let res = await data.json();
+        apartmentData =res.data.getData;
+       // console.log(apartmentData.length)
+        displayApartment(apartmentData)
+    }
+    getApartmentDetails();
+    */
 </script>
