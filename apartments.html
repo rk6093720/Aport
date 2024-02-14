@@ -202,10 +202,11 @@
             </div>
         </section>
         <br>
-        <select class="form-select"  aria-label="Default select example">
-        <option selected>Filter based on their name of Apartment</option>
+        <!-- filter according to name of apartment -->
+        <select class="form-select"  aria-label="Default select example" aria-placeholder="filter">
         </select>
         <br>
+        <!-- sorting according to rent of apartment -->
         <select class="form-select"  aria-label="Default select example">
         <option selected>Sorting based on their name of Apartment</option>
         <option value="All">All</option>
@@ -241,6 +242,7 @@
         </section>
         <!--Apartments Page End-->
         <br>
+        <!-- pagination  -->
         <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <!-- <li class="page-item">
@@ -444,7 +446,7 @@
     let apartment = document.querySelector(".apartments-two__single");
     function displayApartment(data){
         apartment.innerHTML="";
-        data.map((ele)=>{
+        data.forEach((ele)=>{
            // console.log(ele,ele._id);
             let div = document.createElement("div");
             div.setAttribute("class","apartments-two__img");
@@ -491,6 +493,7 @@
         console.log(res.results, res.paginationInfo,res);
        // displayFilter(title)
         displayApartment(res.results)
+        displaySelectGroupt(res.results);
         updatePagination(res.paginationInfo)
     }
     function updatePagination(info){
@@ -559,7 +562,30 @@
                 updateActiveLink(page);
             }
         }
-pagination(page);
+let filterSelect = document.querySelector(".form-select");
+filterSelect.setAttribute("aria-label","filterApartment")
+filterSelect.setAttribute("placeholder","select-tag")
+function displaySelectGroupt(data){
+    filterSelect.innerHTML="";
+     let allOption = document.createElement("option");
+    allOption.textContent = "All";
+    allOption.value = ""; // Set an empty value for the "All" option
+    filterSelect.appendChild(allOption);
+    data.map((item)=>{
+        let option = document.createElement("option");
+        option.textContent = item.title;
+        option.setAttribute(option.value,item.title)
+        filterSelect.append(option)
+    })
+         filterSelect.addEventListener("change", function(e) {
+        let selectedValue = e.target.value;
+        if(selectedValue ===""){
+            pagination(page)
+        }else{
+            displayFilter(selectedValue)
+        }
+    });
+}
 async function displayFilter(title){
 let data = await fetch(`http://localhost:8080/apartment/filter?title=${title}`,{
                      method:"GET",
@@ -569,7 +595,7 @@ let data = await fetch(`http://localhost:8080/apartment/filter?title=${title}`,{
                     }
 })
 const res = await data.json();
-    console.log(res)
+displayApartment(res.results)
 }
-
+pagination(page);
 </script>
