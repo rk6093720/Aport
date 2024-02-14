@@ -7621,7 +7621,40 @@ ul {
   display: block;
   padding: 120px 0 0;
 }
+  .pagination {
+            list-style-type: none;
+            padding: 0;
+        }
 
+        .pagination li {
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .pagination li button {
+            text-decoration: none;
+            padding: 5px 10px;
+            border: 1px solid #007bff;
+            background-color: #f2f2f2;
+            color: #007bff;
+        }
+
+        .pagination li button:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .pagination li button.active {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .pagination li button.disabled {
+            pointer-events: none;
+            background-color: #f2f2f2;
+            color: #ccc;
+            border: 1px solid #ccc;
+        }
 .apartment-details__img-box {
   position: relative;
   display: block;

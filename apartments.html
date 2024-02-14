@@ -204,16 +204,13 @@
         <br>
         <select class="form-select"  aria-label="Default select example">
         <option selected>Filter based on their name of Apartment</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
         </select>
         <br>
         <select class="form-select"  aria-label="Default select example">
         <option selected>Sorting based on their name of Apartment</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+        <option value="All">All</option>
+        <option value="High to Low">High to Low</option>
+        <option value="Low to High">Low to High</option>
         </select>
         <!--Page Header End-->
         <!--Apartments Page Start-->
@@ -244,9 +241,21 @@
         </section>
         <!--Apartments Page End-->
         <br>
-          <nav aria-label="Page navigation example">
+        <nav aria-label="Page navigation example">
             <ul class="pagination">
-
+                <!-- <li class="page-item">
+                <button class="page-link"  aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </button>
+                </li> -->
+                <!-- <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+                <!-- <li class="page-item">
+                <button class="page-link" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </button>
+                </li> -->
             </ul>
             </nav>
           <br>
@@ -429,7 +438,8 @@
 </html>
 <script>
     var token = JSON.parse(localStorage.getItem("token"));
-    console.log(token.token)   
+    console.log(token.token);
+    let apartmentData=[];
     const base = "http://localhost:8080/";
     let apartment = document.querySelector(".apartments-two__single");
     function displayApartment(data){
@@ -466,8 +476,9 @@
             apartment.append(div,ContentDiv)
         })
     }
-        let page =1;
+    let page =1;
     let limit = 10;
+    let total;
   async function pagination(page){
         let data = await fetch(`http://localhost:8080/apartment/filter?page=${page}&limit=${limit}`,{
                  method:"GET",
@@ -477,58 +488,88 @@
             }
         })
         let res = await data.json();
-        console.log(res.results, res.paginationInfo)
+        console.log(res.results, res.paginationInfo,res);
+       // displayFilter(title)
         displayApartment(res.results)
         updatePagination(res.paginationInfo)
     }
- 
-    let container = document.getElementById("pagination");
-    function updatePagination(total){
+    function updatePagination(info){
+        const container = document.querySelector(".pagination");
         container.innerHTML="";
-        const {page,totalPages,limit,totalRecords}=total;
-        //console.log(totalPages)
-        for(let i=0;i<totalPages;i++){
-        const list = document.createElement("li");
-        list.classList.add("page-item");
-        let previous = document.createElement("a");
-        previous.classList.add("page-link");
-        previous.href = "#";
-        previous.setAttribute("aria-label", "Previous");
-        previous.innerHTML = "&laquo;";
-        let index = document.createElement("a");
-        index.classList.add("page-link");
-        index.href = "#";
-        index.textContent = i + 1;
-        let next = document.createElement("a");
-        next.classList.add("page-link");
-        next.href = "#";
-        next.setAttribute("aria-label", "Next");
-        next.innerHTML = "&raquo;";
-        list.appendChild(previous);
-        list.appendChild(index);
-        list.appendChild(next);
-        container.appendChild(list);
-
+        //previous button 
+        const previous = document.createElement("li");
+        const button = document.createElement("button");
+        button.classList.add("page-link");
+        button.setAttribute("aria-label","previous");
+        button.innerHTML=`<span aria-hidden="true">&laquo;</span>`;
+        button.addEventListener("click",prevPage)
+        previous.appendChild(button);
+        container.appendChild(previous);
+        //page number
+        total=info.totalPages;
+        for(let i=1;i<=info.totalPages;i++){
+         const index = document.createElement("li");
+         const indexButton = document.createElement("button");
+         indexButton.textContent = i;
+         indexButton.addEventListener("click", function(event){
+            event.preventDefault();
+            page = i;
+            pagination(i);
+            updateActiveLink(i)
+         })
+         if(i === page){
+            indexButton.classList.add("active")
+         }
+         index.appendChild(indexButton);
+         container.appendChild(index);
         }
+        //next button
+         const next = document.createElement("li");
+        const nextButton = document.createElement("button");
+        nextButton.classList.add("page-link");
+        nextButton.setAttribute("aria-label","previous");
+        nextButton.innerHTML=`<span aria-hidden="true">&raquo;</span>`
+        nextButton.addEventListener("click", nextPage)
+        next.appendChild(nextButton);
+        container.appendChild(next)
     }
- pagination(page)
-
-
-
-   /*  let apartmentData;
-    async function getApartmentDetails(){
-        let data= await fetch("http://localhost:8080/apartment/read",{
-               method:"GET",
-            headers:{
-                Authorization:`Bearer ${token.token}`,
-                 "Content-Type":"application/json",
+       function updateActiveLink(pageNumber) {
+            const links = document.querySelectorAll('.pagination li a');
+            links.forEach(link => {
+                const linkPageNumber = parseInt(link.textContent);
+                if (linkPageNumber === pageNumber) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+   function prevPage() {
+            if (page > 1) {
+                page--;
+                pagination(page);
+                updateActiveLink(page);
             }
-        });
-        let res = await data.json();
-        apartmentData =res.data.getData;
-       // console.log(apartmentData.length)
-        displayApartment(apartmentData)
-    }
-    getApartmentDetails();
-    */
+        }
+
+        function nextPage() {
+            if (page < total) {
+                page++;
+                pagination(page);
+                updateActiveLink(page);
+            }
+        }
+pagination(page);
+async function displayFilter(title){
+let data = await fetch(`http://localhost:8080/apartment/filter?title=${title}`,{
+                     method:"GET",
+                    headers:{
+                        Authorization:`Bearer ${token.token}`,
+                        "Content-Type":"application/json",
+                    }
+})
+const res = await data.json();
+    console.log(res)
+}
+
 </script>
