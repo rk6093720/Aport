@@ -203,15 +203,16 @@
         </section>
         <br>
         <!-- filter according to name of apartment -->
+         <label >Filter-Apartment</label>
         <select class="form-select"  aria-label="Default select example" aria-placeholder="filter">
         </select>
         <br>
         <!-- sorting according to rent of apartment -->
-        <select class="form-select"  aria-label="Default select example">
-        <option selected>Sorting based on their name of Apartment</option>
+        <label >Sort-Apartment</label>
+        <select class="form-select" id="sortSelect"  aria-label="Sort">
         <option value="All">All</option>
-        <option value="High to Low">High to Low</option>
-        <option value="Low to High">Low to High</option>
+        <option value="desc">High to Low</option>
+        <option value="asc">Low to High</option>
         </select>
         <!--Page Header End-->
         <!--Apartments Page Start-->
@@ -441,7 +442,7 @@
 <script>
     var token = JSON.parse(localStorage.getItem("token"));
     console.log(token.token);
-    let apartmentData=[];
+    let apartmentData;
     const base = "http://localhost:8080/";
     let apartment = document.querySelector(".apartments-two__single");
     function displayApartment(data){
@@ -492,6 +493,7 @@
         let res = await data.json();
         console.log(res.results, res.paginationInfo,res);
        // displayFilter(title)
+       apartmentData=res.results;
         displayApartment(res.results)
         displaySelectGroupt(res.results);
         updatePagination(res.paginationInfo)
@@ -562,6 +564,8 @@
                 updateActiveLink(page);
             }
         }
+
+        //filter functionality
 let filterSelect = document.querySelector(".form-select");
 filterSelect.setAttribute("aria-label","filterApartment")
 filterSelect.setAttribute("placeholder","select-tag")
@@ -597,5 +601,29 @@ let data = await fetch(`http://localhost:8080/apartment/filter?title=${title}`,{
 const res = await data.json();
 displayApartment(res.results)
 }
+//sort functionality
+let sortSelect=document.getElementById("sortSelect")
+sortSelect.addEventListener("change", function(e){
+    let select = e.target.value;
+    if(select === "All"){
+        pagination(page)
+    }else{
+        displaySort(select)
+    }
+})
+    async function displaySort(value){
+        let sort = await fetch(`http://localhost:8080/apartment/filter?sortBy=price&sortOrder=${value}`,{
+            method:"GET",
+            headers:{
+                Authorization:`Bearer ${token.token}`,
+                "Content-Type":"application/json",
+            }
+        })
+        const data = await sort.json();
+        displayApartment(data.results)
+    }
+
 pagination(page);
+
+
 </script>
