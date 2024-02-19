@@ -375,8 +375,8 @@
                 }
             })
                 .then((res) => {
-                    console.log(res.data)
-                    if (res.data.error === "InvAlid Password") {
+                    console.log("data",res)
+                    if (res.data.msg === "InvAlid Password") {
                         alert(` Invalid Password`);
                     }
                     if (res.data.status === "success") {

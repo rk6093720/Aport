@@ -628,7 +628,7 @@ ul {
   display: flex;
   align-items: center;
   font-size: 20px;
-  color: var(--aports-white);
+  color: gray;
   -webkit-transition: all 500ms ease;
   transition: all 500ms ease;
 }
