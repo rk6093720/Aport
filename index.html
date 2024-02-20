@@ -897,7 +897,6 @@ var token = JSON.parse(localStorage.getItem("token"));
 function tokenExpire(expire) {
     const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
     const expirationTimeSeconds = expire - currentTime; // Convert to seconds
-
     // Calculate hours, minutes, and seconds
     const hours = Math.floor(expirationTimeSeconds / 3600);
     const remainingSeconds = expirationTimeSeconds % 3600;
