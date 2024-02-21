@@ -665,21 +665,20 @@
                         btn.disabled = true;
                         btn.style.display="none"
                          let button2 = document.createElement("button");
+                         button2.setAttribute("id","download")
                          button2.classList.add("btn","btn-success")
                          button2.textContent = "download pdf";
                          button2.style.marginTop = "20px";
                           button2.style.marginLeft = "10px";
                           button2.addEventListener("click", downloadPdf);
-                             let profile = document.createElement("button");
-                        profile.classList.add("btn","btn-primary");
-                        profile.textContent="Profile";
-                        profile.style.width="120px";
-                        profile.style.marginTop = "20px";
-                        profile.style.marginLeft = "10px";
-                        profile.setAttribute("data-bs-toggle", "modal");
-                        profile.setAttribute("data-bs-target", "#exampleModal");
-                        contentBox.appendChild(profile)
-                         contentBox.appendChild(button2);
+                            contentBox.appendChild(button2);
+                             let cart = document.createElement("button");
+                        cart.classList.add("btn","btn-primary");
+                        cart.textContent="Go To Cart";
+                        cart.style.width="120px";
+                        cart.style.marginTop = "20px";
+                        cart.style.marginLeft = "10px";
+                        contentBox.appendChild(cart)
                         alert(data.msg);
                         load(); // Call load function after the button text changes
                     }else if(data.status === "success" && data.newNotification.contract === "pending"){
@@ -813,6 +812,7 @@ function formSubmit(f){
              const res = await fetch("http://localhost:8080/landlord/read",{
             method:"GET",
             headers:{
+                Authorization:`Bearer ${token.token}`,
                 "Content-Type":"application/json"
             }
         });
@@ -822,12 +822,12 @@ function formSubmit(f){
         let contractPdf = data.Landlords.map((item)=> item.document);
         let a = document.createElement("a");
         a.href = `${base + contractPdf.toString()}`;
-        a.download = `${base + contractPdf.toString()}`;
+        a.setAttribute("download","contract.pdf");
         a.style.display="none";
         document.body.appendChild(a);
-        setTimeout(()=>{
-            a.click();
-        },2000)
+             setTimeout(()=>{
+                a.click();
+             },2000)
         document.body.removeChild(a);
         alert("pdf is download successfully")
         }catch(e){
