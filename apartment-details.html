@@ -49,9 +49,12 @@
     <div class="preloader">
         <div class="preloader__image"></div>
     </div>
+     <div class="stricky-header stricked-menu main-menu">
+            <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+        </div><!-- /.stricky-header -->
     <!-- /.preloader -->
     <div class="page-wrapper">
-        <header class="main-header">
+       <header class="main-header">
             <div class="main-header__top">
                 <div class="main-header__top-inner">
                     <div class="main-header__top-left">
@@ -101,9 +104,6 @@
                             <li class="current" class="dropdown" >
                                 <a href="index.html">Home </a>
                             </li>
-                            <!-- <li class="current">
-                                <a href="about.html">About</a>
-                            </li> -->
                             <li class="current" class="dropdown" >
                                 <a href="#">Appartments</a>
                                 <ul class="shadow-box">
@@ -111,74 +111,25 @@
                                     <li><a href="apartment-details.html">Apartment Details</a></li>
                                 </ul>
                             </li>
-                            <!-- <li class="current" class="dropdown">
-                                <a href="#">News</a>
-                                <ul class="shadow-box">
-                                    <li><a href="news.html">News</a></li>
-                                    <li><a href="news-details.html">News Details</a></li>
-                                </ul>
-                            </li> -->
                             <li class="current">
                                 <a href="contact.html">Contact</a>
                             </li>
                         </ul>
                     </div>
                     <div class="main-menu__right">
-                        <!-- <div class="main-menu__search-btn-box"> -->
-                            <!-- <div class="main-menu__search-box">
+                        <div class="main-menu__search-btn-box"> 
+                            <div class="main-menu__search-box">
                                 <a href="#" class="main-menu__search search-toggler icon-magnifying-glass"></a>
                             </div>
                             <div class="main-menu__btn-box">
                                 <a href="contact.html" class="thm-btn main-menu__btn">Schedule a Visit</a>
-                            </div> -->
-                        <!-- </div> -->
+                            </div>
+                        </div> 
                     </div>
                 </div>
             </div>
         </nav>
-            <!-- <nav class="main-menu">
-                <div class="main-menu__wrapper">
-                    <div class="main-menu__wrapper-inner">
-                        <div class="main-menu__left">
-                            <div class="main-menu__logo">
-                                <a href="index.html"><img src="assets/images/resources/logo-1.png" alt=""></a>
-                            </div>
-                        </div>
-                        <div class="main-menu__main-menu-box">
-                            <a href="#" class="mobile-nav__toggler"><i class="fa fa-bars"></i></a>
-                            <ul class="main-menu__list">
-                                <li class="dropdown">
-                                    <a href="index.html">Home </a>
-                                </li>
-                                <li class="dropdown current">
-                                    <a href="#">Apartments</a>
-                                    <ul class="shadow-box">
-                                        <li><a href="apartments.html">Apartments</a></li>
-                                        <li><a href="apartment-details.html">Apartment Details</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="contact.html">Contact</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="main-menu__right">
-                            <div class="main-menu__search-btn-box">
-                                <div class="main-menu__search-box">
-                                    <a href="#" class="main-menu__search search-toggler icon-magnifying-glass"></a>
-                                </div>
-                                <div class="main-menu__btn-box">
-                                    <a href="contact.html" class="thm-btn main-menu__btn">Schedule a Visit</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </nav> -->
-        </header>
-        <div class="stricky-header stricked-menu main-menu">
-            <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
-        </div><!-- /.stricky-header -->
+        </header>  
         <!--Page Header Start-->
         <section class="page-header">
             <div class="page-header-bg" style="background-image: url(https://images.pexels.com/photos/6969987/pexels-photo-6969987.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500)">
@@ -406,6 +357,7 @@
     </div>
     <!-- /.search-popup -->
     <a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="icon-right-arrow"></i></a>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="assets/vendors/jquery/jquery-3.6.0.min.js"></script>
@@ -667,18 +619,19 @@
                          let button2 = document.createElement("button");
                          button2.setAttribute("id","download")
                          button2.classList.add("btn","btn-success")
-                         button2.textContent = "download pdf";
+                         button2.textContent = "Contract Sign";
                          button2.style.marginTop = "20px";
                           button2.style.marginLeft = "10px";
-                          button2.addEventListener("click", downloadPdf);
+                          button2.addEventListener("click", ()=>{
+                            downloadPdf().then(()=>{
+                                showGoToCartButton();
+                                button2.style.display="none"
+                            })
+                            .catch(()=>{
+                                 console.error("Error signing contract:", error);
+                            })
+                          });
                             contentBox.appendChild(button2);
-                             let cart = document.createElement("button");
-                        cart.classList.add("btn","btn-primary");
-                        cart.textContent="Go To Cart";
-                        cart.style.width="120px";
-                        cart.style.marginTop = "20px";
-                        cart.style.marginLeft = "10px";
-                        contentBox.appendChild(cart)
                         alert(data.msg);
                         load(); // Call load function after the button text changes
                     }else if(data.status === "success" && data.newNotification.contract === "pending"){
@@ -695,6 +648,7 @@
                 } catch (e) {
                     alert(e)
                 }
+
             });
 
             async function getTentant() {
@@ -714,7 +668,21 @@
                 }
             }
             // Call load function on HTML page load
-           
+                function showGoToCartButton(){
+                let cart = document.createElement("button");
+                cart.classList.add("btn","btn-primary");
+                cart.textContent="Go To Cart";
+                cart.style.width="120px";
+                cart.style.marginTop = "20px";
+                cart.style.marginLeft = "10px";
+                cart.addEventListener("click",()=>{
+                    setTimeout(()=>{
+                         localStorage.setItem("Payment",JSON.stringify(details))
+                    window.location.href="./cart.html";
+                    },2000)
+                })
+                contentBox.appendChild(cart)
+                }
             contentBox.append(header, para, btn);
             apartmentDetails.append(containerDiv, contentBox);
         }
@@ -807,33 +775,50 @@ function formSubmit(f){
         f.currentpincode.value ="";
     }
 }
-     async function downloadPdf(){
-        try{
-             const res = await fetch("http://localhost:8080/landlord/read",{
-            method:"GET",
-            headers:{
-                Authorization:`Bearer ${token.token}`,
-                "Content-Type":"application/json"
+async function downloadPdf() {
+    try {
+        const res = await fetch("http://localhost:8080/landlord/read", {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token.token}`
             }
         });
-        //const blob = await res.blob();
-       // const url = window.URL.createObjectURL(blob);
-        const data =  await res.json();
-        let contractPdf = data.Landlords.map((item)=> item.document);
-        let a = document.createElement("a");
-        a.href = `${base + contractPdf.toString()}`;
-        a.setAttribute("download","contract.pdf");
-        a.style.display="none";
-        document.body.appendChild(a);
-             setTimeout(()=>{
-                a.click();
-             },2000)
-        document.body.removeChild(a);
-        alert("pdf is download successfully")
-        }catch(e){
-            alert(e.message)
+        if (!res.ok) {
+            throw new Error(`Failed to fetch PDF file. Status: ${res.status}`);
         }
-     }
+        const data = await res.json();
+        const contractPdf = data.Landlords.find((item) => item.document);
+        if (!contractPdf) {
+            throw new Error("PDF document not found in the response data.");
+        }
+        const pdfUrl = `http://localhost:8080/${contractPdf.document}`;
+         // Fetch PDF content as ArrayBuffer
+        const pdfResponse = await fetch(pdfUrl);
+        const pdfBuffer = await pdfResponse.arrayBuffer();
+        // Create a blob from the PDF content
+        console.log("pdfbuffer",pdfBuffer)
+        const pdfBlob = new Blob([pdfBuffer], { type: 'application/pdf' });
+           console.log("pdfblob",pdfBlob)
+        // Create a URL for the blob
+        const pdfBlobUrl = URL.createObjectURL(pdfBlob);
+        // Create a temporary anchor element
+        const tempAnchor = document.createElement('a');
+        tempAnchor.href = pdfBlobUrl;
+        tempAnchor.setAttribute('download', 'contract.pdf');
+        tempAnchor.style.display = 'none';
+        document.body.appendChild(tempAnchor);
+        // Trigger click event on the anchor
+        tempAnchor.click();
+        // Clean up
+        document.body.removeChild(tempAnchor);
+        URL.revokeObjectURL(pdfBlobUrl);
+        alert("PDF document is downloaded successfully");
+    } catch (error) {
+        alert(`Error: ${error.message}`);
+    }
+}
+
+
 window.onload = load();
 </script>
 

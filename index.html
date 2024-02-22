@@ -907,7 +907,7 @@ function tokenExpire(expire) {
     const formattedExpirationTime = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
     
     console.log(formattedExpirationTime);
-    if(hours <= 0 && minutes <= 0 && seconds <= 0){
+    if(hours < 0 && minutes < 0 && seconds < 0){
         alert("token is expire")
         document.querySelector(".btn.btn-danger").addEventListener("click",
         setTimeout(()=>{
