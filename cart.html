@@ -144,13 +144,64 @@
                     <ul class="thm-breadcrumb list-unstyled">
                         <li><a href="index.html">Home</a></li>
                         <li><span>/</span></li>
-                        <li>Payment</li>
+                        <li>Cart</li>
                     </ul>
                     <!-- <h2>The bulding</h2> -->
                 </div>
             </div>
         </section>
         <!--Page Header End-->
+         <section class="contact-two">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="contact-two__left">
+                            <div class="contact-two__img">
+                                <img src="https://media.istockphoto.com/id/1365544413/video/contact-us-concept.jpg?s=640x640&k=20&c=a6o5RVk_pVTjL_YXzFQYSa76PahdhH7OLCLdv3iel_I=" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="contact-two__right">
+                            <div class="section-title text-left">
+                                <span class="section-title__tagline">contact with us</span>
+                                <h2 class="section-title__title">Get in touch now</h2>
+                            </div>
+                            <p class="contact-two__text-1">Complain for Apartment </p>
+                            <ul class="list-unstyled contact-two__list">
+                                <li>
+                                    <div class="icon">
+                                        <i class="icon-telephone"></i>
+                                    </div>
+                                    <div class="content">
+                                        <p>Have any question?</p>
+                                        <h4> <span>Free</span> <a href="tel:230009850">1234567890</a></h4>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon">
+                                        <i class="icon-email"></i>
+                                    </div>
+                                    <div class="content">
+                                        <p>Write email</p>
+                                        <h4><a href="mailto:needhelp@company.com">needhelp@company.com</a></h4>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon">
+                                        <i class="icon-pin"></i>
+                                    </div>
+                                    <div class="content">
+                                        <p>Visit anytime</p>
+                                        <h4>30 broklyn golden street. New York</h4>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <!--Site Footer Start-->
         <footer class="site-footer">
             <div class="site-footer__top">
@@ -262,7 +313,6 @@
             <!-- /.logo-box -->
             <div class="mobile-nav__container"></div>
             <!-- /.mobile-nav__container -->
-
             <ul class="mobile-nav__contact list-unstyled">
                 <li>
                     <i class="fa fa-envelope"></i>
@@ -281,14 +331,10 @@
                     <a href="#" class="fab fa-instagram"></a>
                 </div><!-- /.mobile-nav__social -->
             </div><!-- /.mobile-nav__top -->
-
-
-
         </div>
         <!-- /.mobile-nav__content -->
     </div>
     <!-- /.mobile-nav__wrapper -->
-
     <div class="search-popup">
         <div class="search-popup__overlay search-toggler"></div>
         <!-- /.search-popup__overlay -->
@@ -304,9 +350,7 @@
         <!-- /.search-popup__content -->
     </div>
     <!-- /.search-popup -->
-
     <a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="icon-right-arrow"></i></a>
-
     <script src="assets/vendors/jquery/jquery-3.6.0.min.js"></script>
     <script src="assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assets/vendors/jarallax/jarallax.min.js"></script>
@@ -331,12 +375,17 @@
     <script src="assets/vendors/timepicker/timePicker.js"></script>
     <script src="assets/vendors/circleType/jquery.circleType.js"></script>
     <script src="assets/vendors/circleType/jquery.lettering.min.js"></script>
-
-
-
-
     <!-- template js -->
     <script src="assets/js/aports.js"></script>
 </body>
-
 </html>
+<script>
+    const cart = JSON.parse(localStorage.getItem("Payment"));
+    function displayCart(cart){
+        const data =[];
+        data.push(cart);
+        document.querySelector("row")
+        console.log(data)
+    }
+    displayCart(cart)
+</script>

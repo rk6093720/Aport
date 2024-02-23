@@ -527,6 +527,7 @@
         displayApartment(details);
     }
     getApartmentDetails();
+   //let cartData = localStorage.getItem("Payment",JSON.stringify(details)) || [];
         const base = "http://localhost:8080/";
     let apartmentDetails = document.querySelector(".col-xl-12");
     async function displayApartment(details) {
@@ -567,7 +568,7 @@
             let terraceText = document.createElement("p");
             terraceText.textContent = "terrace";
             let price = document.createElement("h3");
-            price.textContent = details.price;
+            price.textContent = "₹"+details.price;
             let priceText = document.createElement("p");
             priceText.textContent = "Price";
             divList.append(heading, text, floor, floorText, bedroom, bedroomText, bathRooms, bathRoomsText, terrace, terraceText, price, priceText);
