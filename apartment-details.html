@@ -672,15 +672,28 @@
                 function showGoToCartButton(){
                 let cart = document.createElement("button");
                 cart.classList.add("btn","btn-primary");
-                cart.textContent="Go To Cart";
+                cart.textContent="Book Apartment";
                 cart.style.width="120px";
                 cart.style.marginTop = "20px";
                 cart.style.marginLeft = "10px";
                 cart.addEventListener("click",()=>{
+                    /*
                     setTimeout(()=>{
                          localStorage.setItem("Payment",JSON.stringify(details))
                     window.location.href="./cart.html";
                     },2000)
+                    */
+                    let obj = {
+                        apartment_Id:details._id,
+                        apartment_details:{
+                        image:`${base + details.apartmentImage}`,
+                        price:details.price,
+                        title:details.title,
+                        city:details.city,
+                        typeofApartment:details.typeofApartment
+                        }
+                    }
+                    console.log(obj)
                 })
                 contentBox.appendChild(cart)
                 }
