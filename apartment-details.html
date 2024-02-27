@@ -649,10 +649,53 @@
                 } catch (e) {
                     alert(e)
                 }
-
             });
-
-            async function getTentant() {
+            // Call load function on HTML page load
+               async function showGoToCartButton(){
+                let cart = document.createElement("button");
+                cart.classList.add("btn","btn-primary");
+                cart.textContent="Book Apartment";
+                cart.style.width="120px";
+                cart.style.marginTop = "20px";
+                cart.style.marginLeft = "10px";
+                cart.addEventListener("click",async()=>{
+                    /*
+                    setTimeout(()=>{
+                         localStorage.setItem("Payment",JSON.stringify(details))
+                    window.location.href="./cart.html";
+                    },2000)
+                    */
+                    try{
+                        const user = await getTentant()
+                        let obj = {
+                            tentants_id:user._id,
+                            apartment_id:details._id,
+                            apartment_details:{
+                                image:`${base + details.apartmentImage}`,
+                                price:details.price,
+                                title:details.title,
+                                city:details.city,
+                                typeofApartment:details.typeofApartment
+                            }
+                        }
+                        const res = await fetch(`http://localhost:8080/cart/addcart`,{
+                            method:"POST",
+                            headers:{
+                                "Content-Type":"application/json"
+                            },
+                            body:JSON.stringify(obj)
+                        })
+                        const data = await res.json();
+                        if(data.status === "success"){
+                            window.location.href="./cart.html"
+                        }
+                    }catch(e){
+                        console.log(e.msg)
+                    }
+                })
+                contentBox.appendChild(cart)
+                }
+                   async function getTentant() {
                 try {
                     const res = await fetch("http://localhost:8080/tentants/read",{
                         method:"GET",
@@ -668,37 +711,9 @@
                     alert(e.msg)
                 }
             }
-            // Call load function on HTML page load
-                function showGoToCartButton(){
-                let cart = document.createElement("button");
-                cart.classList.add("btn","btn-primary");
-                cart.textContent="Book Apartment";
-                cart.style.width="120px";
-                cart.style.marginTop = "20px";
-                cart.style.marginLeft = "10px";
-                cart.addEventListener("click",()=>{
-                    /*
-                    setTimeout(()=>{
-                         localStorage.setItem("Payment",JSON.stringify(details))
-                    window.location.href="./cart.html";
-                    },2000)
-                    */
-                    let obj = {
-                        apartment_Id:details._id,
-                        apartment_details:{
-                        image:`${base + details.apartmentImage}`,
-                        price:details.price,
-                        title:details.title,
-                        city:details.city,
-                        typeofApartment:details.typeofApartment
-                        }
-                    }
-                    console.log(obj)
-                })
-                contentBox.appendChild(cart)
-                }
             contentBox.append(header, para, btn);
             apartmentDetails.append(containerDiv, contentBox);
+
         }
     }
     function load() {
@@ -835,5 +850,3 @@ async function downloadPdf() {
 
 window.onload = load();
 </script>
-
-
