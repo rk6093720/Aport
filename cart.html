@@ -165,7 +165,7 @@
                         <div class="contact-two__right">
                             <div class="section-title text-left">
                                 <span class="section-title__tagline">contact with us</span>
-                                <h2 class="section-title__title">Get in touch now</h2>
+                                <!-- <h2 class="section-title__title">Get in touch now</h2> -->
                             </div>
                             <p class="contact-two__text-1">Complain for Apartment </p>
                             <ul class="list-unstyled contact-two__list">
@@ -380,24 +380,48 @@
 </body>
 </html>
 <script>
-  //  const cart = JSON.parse(localStorage.getItem("Payment"));
-    const cartData = document.querySelector("contact-two");
-    function displayCart(cart){
-        cartData.innerHTML="";
-        const box = document.createElement("div"); // container box
-        box.setAttribute("class","container");
-        const row = document.createElement("div");
-        row.classList.add("row");   //row
-        const column = document.createElement("div");
-        column.classList.add("col-xl-6 col-lg-6")  //column
-        const left = document.createElement("contact-two__left");
-        left.classList.add("contact-two__left");
-        const imagediv = document.createElement("div");
-        imagediv.classList.add("contact-two__img");
-        const image = document.createElement("img");
-        image.src = "";
-        data.push(cart);
-
+    async function getData(){
+        try{
+            const res = await fetch(`http://localhost:8080/cart/read`,{
+                method:"GET",
+                headers:{
+                    "Content-Type":"application/json"
+                }
+            })
+            const data = await res.json();
+              console.log("data",data.data);
+              displayCart(data.data)
+        }catch(e){
+            console.log(e.message)
+        }
     }
-    displayCart(cart)
+  //  const cart = JSON.parse(localStorage.getItem("Payment"));
+  const baseUrl = "http://localhost:8080/"
+    const cartData = document.querySelector(".contact-two");
+    function displayCart(data){
+        cartData.innerHTML="";
+        data.forEach((item)=>{
+            console.log("cart",item);
+            const box = document.createElement("div") // container box
+            box.classList.add("container");
+            const row = document.createElement("div");
+            row.classList.add("row");
+            const col = document.createElement("div");
+            col.classList.add("col-xl-6","col-lg-6");
+            const left = document.createElement("div");
+            left.classList.add("contact-two__left");
+            const imagediv = document.createElement("div");
+            imagediv.classList.add("contact-two__img");
+            let image = document.createElement("img");
+            image.src=`${item.apartment_details.image}`;
+            imagediv.append(image);
+            left.append(imagediv);
+            col.append(left);
+
+            row.append(col);
+            box.append(row);
+            cartData.append(box)
+        })
+    }
+    getData()
 </script>
