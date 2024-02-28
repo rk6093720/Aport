@@ -135,11 +135,22 @@
             </div>
         </nav>
         </header> 
-        <br>
         <!--Page Header Start-->
-        <!--Page Header End-->
-         <section class="contact-two">
+        <section class="page-header">
+            <div class="page-header-bg" style="background-image: url(assets/images/backgrounds/page-header-bg.jpg)">
+            </div>
+            <div class="container">
+                <div class="page-header__inner">
+                    <ul class="thm-breadcrumb list-unstyled">
+                        <li><a href="index.html">Home</a></li>
+                        <li><span>/</span></li>
+                        <li>payment</li>
+                    </ul>
+                    <!-- <h2>The bulding</h2> -->
+                </div>
+            </div>
         </section>
+    
         <!--Site Footer Start-->
         <footer class="site-footer">
             <div class="site-footer__top">
@@ -318,77 +329,5 @@
 </body>
 </html>
 <script>
-    const user = JSON.parse(localStorage.getItem("token"))
-    async function getData(){
-        try{
-            const res = await fetch(`http://localhost:8080/cart/read`,{
-                method:"GET",
-                headers:{
-                    Authorization:`Bearer ${user.token}`,
-                    "Content-Type":"application/json"
-                }
-            })
-            const data = await res.json();
-              console.log("data",data.data);
-              displayCart(data.data)
-        }catch(e){
-            console.log(e.message)
-        }
-    }
-  //  const cart = JSON.parse(localStorage.getItem("Payment"));
-  const baseUrl = "http://localhost:8080/"
-    const cartData = document.querySelector(".contact-two");
-    function displayCart(data){
-        cartData.innerHTML="";
-        data.forEach((item)=>{
-            console.log("cart",item);
-            const box = document.createElement("div") // container box
-            box.classList.add("container");
-            const row = document.createElement("div");
-            row.classList.add("row");
-            const col = document.createElement("div");
-            col.classList.add("col-xl-6","col-lg-6");
-            const left = document.createElement("div");
-            left.classList.add("contact-two__left");
-            const imagediv = document.createElement("div");
-            imagediv.classList.add("contact-two__img");
-            let image = document.createElement("img");
-            image.src=`${item.apartment_details.image}`;
-            imagediv.append(image)
-            let imageleft = document.createElement("div");
-            imageleft.style.display="grid";
-            imageleft.style.textAlign="start";
-            imageleft.style.gridTemplateColumns="repeat(2,300px)";
-            imageleft.style.gridGap="10px";
-            let pdiv = document.createElement("div");
-            let ptext = document.createElement("h2");
-            ptext.textContent=`Title:${item.apartment_details.title}`;
-            pdiv.append(ptext);
-             let pricediv = document.createElement("div");
-            let price = document.createElement("p");
-            price.textContent = `Price:${"₹"+item.apartment_details.price}`;
-            pricediv.append(price);
-             let citydiv = document.createElement("div");
-            let city = document.createElement("p");
-            city.textContent=`City:${item.apartment_details.city}`;
-            citydiv.append(city)
-             let apartmentdiv = document.createElement("div");
-            let apartmentType = document.createElement("p");
-            apartmentType.textContent= `Apartment:${item.apartment_details.typeofApartment}`;
-            apartmentdiv.append(apartmentType)
-            let button = document.createElement("button");
-            button.classList.add("btn","btn-success");
-            button.style.width="400px";
-            button.style.height="50px";
-            button.textContent="Payment";
-            button.style.borderRadius="10px";
-            imageleft.append(pdiv,pricediv,citydiv,apartmentdiv);
-            left.append(imagediv,imageleft,button);
-            col.append(left);
-            row.append(col);
-            box.append(row);
-            cartData.append(box)
-        })
-    }
-    getData()
+
 </script>
