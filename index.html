@@ -216,10 +216,7 @@
             </div>
         </section>
         <!--CTA One End-->
-
-<br>
-  
-
+        <br>
         <!--Brand One Start-->
         <section class="brand-two">
             <div class="container">
@@ -493,8 +490,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (token && token.token) {
         // User is logged in
         let username = token.email.split("@")[0];
-
-        // Create elements for username display and logout button
+           // Create elements for username display and logout button
         let usernameDisplay = document.createElement("span");
         usernameDisplay.textContent = "Welcome,"+username;
          document.querySelector(".main-menu__list  li a[href='./signup.html']").style.display = "none";
@@ -502,12 +498,13 @@ document.addEventListener("DOMContentLoaded", function () {
         let logoutButton = document.createElement("button");
         logoutButton.classList.add("btn","btn-danger")
         logoutButton.textContent = "Logout";
-
         // Append the elements to the login-div
         logindiv.appendChild(usernameDisplay);
         logindiv.appendChild(logoutButton);
-
         // Add event listener to the logout button
+        usernameDisplay.addEventListener("click", function(){
+            alert("Show user's profile")
+        })
         logoutButton.addEventListener("click", function () {
             // Remove token from localStorage
             localStorage.removeItem("token");
@@ -525,18 +522,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelector(".login-div .btn.btn-danger").style.display = "none";
     }
 });
-
-
-    function logout() {
-              localStorage.removeItem("token");
-    // Update the UI when logging out
-    document.querySelector("login-div .user-name").style.display = "none";
-    document.querySelector(".btn.btn-danger").style.display = "none";
-    document.querySelector(".main-menu__list  li a[href='./signup.html']").style.display = "inline-block";
-    document.querySelector(".main-menu__list  li a[href='./login.html']").style.display = "inline-block";
-    alert("You have been logged out due to session expiry")
-}
-
+// apartment details read
     let apartmentData;
     async function getApartmentDetails(){
         let data= await fetch("http://localhost:8080/apartment/read",{
@@ -608,5 +594,4 @@ function tokenExpire(expire) {
         },1000) );
     }
 }
-
 </script>
