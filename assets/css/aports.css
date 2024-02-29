@@ -7496,6 +7496,12 @@ ul {
   transition: opacity 0.3s, visibility 0s linear 0.3s ;
   z-index: 1000;
 }
+.login-div{
+  position:absolute;
+  left: 600px;
+  top: 32%;
+  display: flex;
+}
 .userexist .show  {
   visibility: visible;
   opacity: 1;
