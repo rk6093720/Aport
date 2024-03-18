@@ -10,15 +10,12 @@
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicons/favicon-16x16.png" />
     <link rel="manifest" href="assets/images/favicons/site.webmanifest" />
     <meta name="description" content="Aports HTML 5 Template " />
-    
     <!-- fonts -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
         rel="stylesheet">
-    
     <link rel="stylesheet" href="assets/vendors/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/vendors/animate/animate.min.css" />
     <link rel="stylesheet" href="assets/vendors/animate/custom-animate.css" />
@@ -94,36 +91,19 @@
           <section class="contact-two">
             <div class="container">
                 <div class="row">
-                    <!-- <div class="col-xl-6 col-lg-6">
-                        <div class="contact-two__left">
-                            <div class="contact-two__img">
-                                <img src="https://media.istockphoto.com/id/1365544413/video/contact-us-concept.jpg?s=640x640&k=20&c=a6o5RVk_pVTjL_YXzFQYSa76PahdhH7OLCLdv3iel_I=" alt="">
-                            </div>
-                        </div>
-                    </div> -->
                     <div class="col-xl-6 col-lg-6">
                         <div class="contact-two__right">
                             <div class="section-title text-left">
-                                <!-- <span class="section-title__tagline">contact with us</span> -->
                                 <h2 class="section-title__title">Personal Information</h2>
                             </div>
-                            <p class="contact-two__text-1">Complain for Apartment </p>
+                            <!-- <p class="contact-two__text-1">Complain for Apartment </p> -->
                             <ul class="list-unstyled contact-two__list">
-                                <li>
-                                    <div class="icon">
-                                        <i class="icon-telephone"></i>
-                                    </div>
-                                    <div class="content">
-                                        <p>Have any question?</p>
-                                        <h4> <span>Free</span> <a href="tel:230009850">1234567890</a></h4>
-                                    </div>
-                                </li>
                                 <li>
                                     <div class="icon">
                                         <i class="icon-email"></i>
                                     </div>
                                     <div class="content">
-                                        <p>Write email</p>
+                                        <p> email</p>
                                         <h4><a href="mailto:needhelp@company.com">needhelp@company.com</a></h4>
                                     </div>
                                 </li>
@@ -321,3 +301,67 @@
     <script src="assets/js/aports.js"></script>
 </body>
 </html>
+<script>
+    var profile = JSON.parse(localStorage.getItem("token"));
+    console.log(profile)
+    let profilesection = document.querySelector(".contact-two")
+    function displayProfile(data){
+        console.log(data.email)
+        profilesection.innerHTML="";
+        let box = document.createElement("div");
+        box.setAttribute("class","container");
+        let row = document.createElement("div");
+        row.setAttribute("class","row");
+        let div = document.createElement("div");
+        div.classList.add("col-xl-6","col-lg-6");
+        let right = document.createElement("div");
+        right.setAttribute("class","contact-two__right");
+        let  title = document.createElement("div");
+        title.setAttribute("class","section-title text-left");
+        let h2 = document.createElement("h2");
+        h2.setAttribute("class","section-title__title");
+        h2.textContent ="Personal Information";
+        let ul = document.createElement("ul");
+        ul.setAttribute("class","list-unstyled contact-two__list");
+        let li = document.createElement("li");
+         let lidiv = document.createElement("div");
+         lidiv.setAttribute("class","icon");
+         let i = document.createElement("i");
+         i.setAttribute("class","icon-email");
+         let content = document.createElement("div");
+         content.setAttribute("class","content");
+         let p = document.createElement("p");
+         p.textContent="email";
+         let h4 = document.createElement("h4");
+         let a= document.createElement("a");
+         a.href= `mailto:${data.email}`;
+         a.textContent=data.email;
+       //  ............. 2nd list
+         let secondlidiv = document.createElement("div");
+         secondlidiv.setAttribute("class","icon");
+         let secondi = document.createElement("i");
+         secondi.classList.add("bi","bi-person");
+         let secondcontent = document.createElement("div");
+         content.setAttribute("class","content");
+         let secondp = document.createElement("p");
+         secondp.textContent="Role";
+         let secondh4 = document.createElement("h4");
+         let seconda= document.createElement("p");
+         seconda.textContent=data.role;
+         secondh4.append(seconda)
+         h4.append(a);
+         secondlidiv.append(secondi)
+         lidiv.append(i);
+         content.append(p,h4);
+         secondcontent.append(secondp,secondh4)
+         li.append(lidiv,content,secondlidiv,secondcontent);
+         ul.append(li);
+         title.append(h2);
+         right.append(title,ul);
+         div.append(right)
+         row.append(div)
+         box.append(row);
+         profilesection.append(box)
+    }
+    displayProfile(profile)
+</script>

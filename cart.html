@@ -382,6 +382,35 @@
             button.style.height="50px";
             button.textContent="Make a Payment";
             button.style.borderRadius="10px";
+            button.addEventListener("click", async function(){
+                let id;
+                 for(let i=0;i<item.tentants_id.length;i++)
+                 {
+                    if(i<item.tentants_id.length){
+                        id = item.tentants_id[i];
+                    }
+                 }
+                const payload={
+                    paymentTentant:id,
+                    amount:item.apartment_details.price,
+                    paymentMethod:"phone pay",
+                    paymentDate:new Date(),
+                    apartmentId: item.apartment_id
+                }
+                try{
+                  const addpayment = await fetch("http://localhost:8080/payment/create",{
+                    method:"POST",
+                    headers:{
+                         "Content-type":"application/json"
+                    },
+                    body:JSON.stringify(payload)
+                  })
+                  const data = await addpayment.json();
+                     window.location.href="./payment.html";
+                }catch(error){
+                    throw error
+                }
+            })
             imageleft.append(pdiv,pricediv,citydiv,apartmentdiv);
             left.append(imagediv,imageleft,button);
             col.append(left);

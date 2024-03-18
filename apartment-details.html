@@ -55,7 +55,7 @@
     <!-- /.preloader -->
     <div class="page-wrapper">
        <header class="main-header">
-            <div class="main-header__top">
+            <!-- <div class="main-header__top">
                 <div class="main-header__top-inner">
                     <div class="main-header__top-left">
                         <ul class="list-unstyled main-header__contact-list">
@@ -89,7 +89,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
                <nav class="main-menu">
             <div class="main-menu__wrapper">
                 <div class="main-menu__wrapper-inner">
@@ -607,6 +607,7 @@
                         body: JSON.stringify(payload)
                     })
                     const data = await res.json();
+                    console.log("contract",data)
                      if (data.status === "failed" && data.contract === "pending") {
                         btn.textContent = data.contract;
                         btn.disabled=true;

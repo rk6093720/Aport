@@ -137,7 +137,7 @@
         </header> 
         <!--Page Header Start-->
         <section class="page-header">
-            <div class="page-header-bg" style="background-image: url(assets/images/backgrounds/page-header-bg.jpg)">
+            <div class="page-header-bg" style="background-image: url(https://paytmblogcdn.paytm.com/wp-content/uploads/2023/07/UPI-Autopay_-Revolutioninzing-payments-for-customers-and-merchants-1.jpg)">
             </div>
             <div class="container">
                 <div class="page-header__inner">
@@ -150,7 +150,19 @@
                 </div>
             </div>
         </section>
-    
+        <div class="payment">
+        </div>
+        <div class="formofPayment">
+            <div class="transactionId">
+                <input type="text">
+            </div>
+            <div class="name">
+                <input type="text">
+            </div>
+            <div class="paymentDate">
+                <input type="text">
+            </div>
+        </div>
         <!--Site Footer Start-->
         <footer class="site-footer">
             <div class="site-footer__top">
@@ -330,4 +342,40 @@
 </html>
 <script>
 
+    async function getQrcode(){
+        try{
+            const link = await fetch("http://localhost:8080/payment/read",{
+                method:"GET",
+                headers:{
+                    "Content-type":"application/json"
+                }
+            })
+            const data = await link.json(); 
+            console.log(data.Payment);
+            displayQrCode(data.Payment)
+        }catch(err){
+             console.log(err)
+        }
+    }
+    getQrcode();
+    const qrcode = document.querySelector(".payment");
+    function displayQrCode(data){
+        qrcode.innerHTML = "";
+        data.forEach((item)=>{
+            let div = document.createElement("div");
+            div.style.width="50%";
+            div.style.height="500px";
+            div.style.margin="auto";
+            div.setAttribute("class","container");
+            let heading = document.createElement("h1");
+            heading.textContent="QrCode Scanner for Rental Apartment payment";
+            let image = document.createElement("img");
+            image.style.width="500px";
+            image.style.height="400px";
+            image.style.marginLeft="30px";
+            image.src = `${item.qrCodeLink}`
+            div.append(heading,image);
+            qrcode.append(div)
+        })
+    }
 </script>
