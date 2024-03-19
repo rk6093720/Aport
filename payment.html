@@ -438,10 +438,27 @@ document.querySelector("form").addEventListener("submit",async function(e){
             body:formData
         })
         const data = await res.json();
-        console.log(data)
+        if(data.status==="success"){
+            alert("data is save successfully")
+            movetohome();
+        }
     }catch(err){
         throw err;
     }
-
 })
+
+async function movetohome(){
+       try{
+         const res = await fetch("http://localhost:8080/payment/approve/read",{
+            method:"GET",
+        })
+        const data = await res.json();
+        if(data.status==="success"){
+            window.location.href="./index.html"
+        }
+    }catch(err){
+        throw err;
+    } 
+}
+
 </script>
