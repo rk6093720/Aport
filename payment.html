@@ -150,19 +150,59 @@
                 </div>
             </div>
         </section>
+        <!--payment  -->
         <div class="payment">
         </div>
-        <div class="formofPayment">
-            <div class="transactionId">
-                <input type="text">
-            </div>
-            <div class="name">
-                <input type="text">
-            </div>
-            <div class="paymentDate">
-                <input type="text">
-            </div>
-        </div>
+        <!-- payment details -->
+          <section class="contact-three">
+                <div class="container">
+                    <div class="contact-three__inner">
+                        <div class="section-title text-center">
+                            <span class="section-title__tagline">welcome</span>
+                            <h2 class="section-title__title">Payment Details</h2>
+                        </div>
+                        <div class="contact-three__form-box">
+                            <form action="assets/inc/sendemail.php" class="contact-three__form contact-form-validated"
+                                novalidate="novalidate">
+                                <div class="row">
+                                    <div class="row-xl-6">
+                                        <div class="contact-form__input-box">
+                                        <p style="text-align: start;">Transaction-ID</p>
+                                        <input class="transactionID" type="text" placeholder="Enter transactionID" name="transactionID" required>
+                                        </div>
+                                    </div>
+                                    <div class="row-xl-6">
+                                        <div class="contact-form__input-box">
+                                        <p style="text-align: start;">Name</p>
+                                        <input class="name" type="text" placeholder="Enter name" name="name" required>
+                                        </div>
+                                    </div>
+                                       <div class="row-xl-6">
+                                        <div class="contact-form__input-box">
+                                        <p style="text-align: start;">Payment Date</p>
+                                        <input class="paymentDate" type="date" placeholder="Enter payment Date" name="paymentDate" required>
+                                        </div>
+                                    </div>
+                                       <div class="row-xl-6">
+                                        <div class="contact-form__input-box">
+                                        <p style="text-align: start;">screenShot of Payment</p>
+                                        <input class="screenShot" type="file" placeholder="Enter screenShotofpayment" id="image" accept='image/*' name="screenShot" required>
+                                        </div>
+                                    </div>
+                                </div>   
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="contact-form__btn-box">
+                                            <button type="submit" id="Payment" class="thm-btn contact-form__btn">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+      
         <!--Site Footer Start-->
         <footer class="site-footer">
             <div class="site-footer__top">
@@ -378,4 +418,30 @@
             qrcode.append(div)
         })
     }
+    //post details of payment
+    
+document.querySelector("form").addEventListener("submit",async function(e){
+    e.preventDefault();
+    let transactionId = document.querySelector(".transactionID").value;
+    let name = document.querySelector(".name").value;
+    let paymentDate = document.querySelector(".paymentDate").value;
+    let fileInput = document.querySelector(".screenShot");
+    let screenShot = fileInput.files[0];
+    const formData = new FormData();
+    formData.append("screenShot",screenShot);
+    formData.append("transactionId",transactionId);
+    formData.append("name",name);
+    formData.append("paymentDate",paymentDate)
+    try{
+         const res = await fetch("http://localhost:8080/payment/screenShot",{
+            method:"POST",
+            body:formData
+        })
+        const data = await res.json();
+        console.log(data)
+    }catch(err){
+        throw err;
+    }
+
+})
 </script>
