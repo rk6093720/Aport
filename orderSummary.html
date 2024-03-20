@@ -137,72 +137,7 @@
         </header> 
         <!--Page Header Start-->
         <section class="page-header">
-            <div class="page-header-bg" style="background-image: url(https://paytmblogcdn.paytm.com/wp-content/uploads/2023/07/UPI-Autopay_-Revolutioninzing-payments-for-customers-and-merchants-1.jpg)">
-            </div>
-            <div class="container">
-                <div class="page-header__inner">
-                    <ul class="thm-breadcrumb list-unstyled">
-                        <li><a href="index.html">Home</a></li>
-                        <li><span>/</span></li>
-                        <li>payment</li>
-                    </ul>
-                    <!-- <h2>The bulding</h2> -->
-                </div>
-            </div>
         </section>
-        <!--payment  -->
-        <div class="payment">
-        </div>
-        <!-- payment details -->
-          <section class="contact-three">
-                <div class="container">
-                    <div class="contact-three__inner">
-                        <div class="section-title text-center">
-                            <span class="section-title__tagline">welcome</span>
-                            <h2 class="section-title__title">Payment Details</h2>
-                        </div>
-                        <div class="contact-three__form-box">
-                            <form action="assets/inc/sendemail.php" class="contact-three__form contact-form-validated"
-                                novalidate="novalidate">
-                                <div class="row">
-                                    <div class="row-xl-6">
-                                        <div class="contact-form__input-box">
-                                        <p style="text-align: start;">Transaction-ID</p>
-                                        <input class="transactionID" type="text" placeholder="Enter transactionID" name="transactionID" required>
-                                        </div>
-                                    </div>
-                                    <div class="row-xl-6">
-                                        <div class="contact-form__input-box">
-                                        <p style="text-align: start;">Name</p>
-                                        <input class="name" type="text" placeholder="Enter name" name="name" required>
-                                        </div>
-                                    </div>
-                                       <div class="row-xl-6">
-                                        <div class="contact-form__input-box">
-                                        <p style="text-align: start;">Payment Date</p>
-                                        <input class="paymentDate" type="date" placeholder="Enter payment Date" name="paymentDate" required>
-                                        </div>
-                                    </div>
-                                       <div class="row-xl-6">
-                                        <div class="contact-form__input-box">
-                                        <p style="text-align: start;">screenShot of Payment</p>
-                                        <input class="screenShot" type="file" placeholder="Enter screenShotofpayment" id="image" accept='image/*' name="screenShot" required>
-                                        </div>
-                                    </div>
-                                </div>   
-                                <div class="row">
-                                    <div class="col-xl-12">
-                                        <div class="contact-form__btn-box">
-                                            <button type="submit" id="Payment" class="thm-btn contact-form__btn">Checkout</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </section>
-      
         <!--Site Footer Start-->
         <footer class="site-footer">
             <div class="site-footer__top">
@@ -384,66 +319,41 @@
 
     async function getQrcode(){
         try{
-            const link = await fetch("http://localhost:8080/payment/read",{
+            const link = await fetch("http://localhost:8080/payment/approve/read",{
                 method:"GET",
                 headers:{
                     "Content-type":"application/json"
                 }
             })
             const data = await link.json(); 
-            console.log(data.Payment);
-            displayQrCode(data.Payment)
+            console.log(data.approve);
+            displayOrder(data.approve)
         }catch(err){
              console.log(err)
         }
     }
     getQrcode();
-    const qrcode = document.querySelector(".payment");
-    function displayQrCode(data){
-        qrcode.innerHTML = "";
+ 
+    let order = document.querySelector(".page-header");
+     function displayOrder(data){
+        order.innerHTML="";
         data.forEach((item)=>{
-            let div = document.createElement("div");
-            div.style.width="50%";
-            div.style.height="500px";
-            div.style.margin="auto";
-            div.setAttribute("class","container");
-            let heading = document.createElement("h1");
-            heading.textContent="QrCode Scanner for Rental Apartment payment";
-            let image = document.createElement("img");
-            image.style.width="500px";
-            image.style.height="400px";
-            image.style.marginLeft="30px";
-            image.src = `${item.qrCodeLink}`
-            div.append(heading,image);
-            qrcode.append(div)
+            if(item.approve === true){
+                let div = document.createElement("div");
+                div.style.border="1px solid black";
+                div.style.width="50%";
+                div.style.height="100px";
+                div.style.margin="auto";
+                let h1 = document.createElement("h1");
+                h1.textContent ="You booked the Apartment Successfully";
+                h1.style.color="red";
+                div.append(h1);
+                order.append(div)
+            }
         })
-    }
-    //post details of payment
-    
-document.querySelector("form").addEventListener("submit",async function(e){
-    e.preventDefault();
-    let transactionId = document.querySelector(".transactionID").value;
-    let name = document.querySelector(".name").value;
-    let paymentDate = document.querySelector(".paymentDate").value;
-    let fileInput = document.querySelector(".screenShot");
-    let screenShot = fileInput.files[0];
-    const formData = new FormData();
-    formData.append("screenShot",screenShot);
-    formData.append("transactionId",transactionId);
-    formData.append("name",name);
-    formData.append("paymentDate",paymentDate)
-    try{
-         const res = await fetch("http://localhost:8080/payment/screenShot",{
-            method:"POST",
-            body:formData
-        })
-        const data = await res.json();
-        if(data.status==="success"){
-            alert("order  is  successfully");
-            window.location.href="./orderSummary.html"
-        }
-    }catch(err){
-        throw err;
-    }
-})
+        setTimeout(()=>{
+            window.location.href="./index.html"
+        },5000)
+     }
+
 </script>

@@ -42,12 +42,11 @@
     <link rel="stylesheet" href="assets/css/aports-responsive.css" />
 </head>
 <body class="custom-cursor">
-
-    <div class="custom-cursor__cursor"></div>
-    <div class="custom-cursor__cursor-two"></div>
     <div class="preloader">
         <div class="preloader__image"></div>
     </div>
+         <div class="custom-cursor__cursor"></div>
+    <div class="custom-cursor__cursor-two"></div>
     <!-- /.preloader -->
     <div class="page-wrapper">
             <header class="main-header-two">
@@ -87,41 +86,20 @@
                 </div>
             </nav>
         </header>
+    
+      
         <!-- profile section -->
           <section class="contact-two">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-6 col-lg-6">
-                        <div class="contact-two__right">
-                            <div class="section-title text-left">
-                                <h2 class="section-title__title">Personal Information</h2>
-                            </div>
-                            <!-- <p class="contact-two__text-1">Complain for Apartment </p> -->
-                            <ul class="list-unstyled contact-two__list">
-                                <li>
-                                    <div class="icon">
-                                        <i class="icon-email"></i>
-                                    </div>
-                                    <div class="content">
-                                        <p> email</p>
-                                        <h4><a href="mailto:needhelp@company.com">needhelp@company.com</a></h4>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="icon">
-                                        <i class="icon-pin"></i>
-                                    </div>
-                                    <div class="content">
-                                        <p>Visit anytime</p>
-                                        <h4>30 broklyn golden street. New York</h4>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </section>
+   
+
+            <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+
         <!--Site Footer Start-->
         <footer class="site-footer">
             <div class="site-footer__top">
@@ -220,6 +198,124 @@
         </footer>
         <!--Site Footer End-->
     </div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+               Add-Profile
+            </button>
+ <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add User</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form id="my-form"  novalidate="novalidate">
+      <div class="modal-body">
+                   <div class="row g-3">
+                        <div class="col">
+                            <label for="Firstname">Firstname</label>
+                          <input id="firstName" type="text" class="form-control" placeholder="Firstname" name="firstName" aria-label="First name">
+                        </div>
+                        <div class="col">
+                            <label for="Lastname">LastName</label>
+                          <input id="lastName" type="text" class="form-control" placeholder="Lastname" aria-label="Lastname">
+                        </div>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col">
+                            <label for="email">Email</label>
+                          <input  id="email" type="email" class="form-control" placeholder="email" aria-label="email">
+                        </div>
+                        <div class="col">
+                            <label for="phone">Phone</label>
+                          <input id="phone" type="text" class="form-control" c placeholder="phone" maxlength="10" aria-label="phone">
+                        </div>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col">
+                            <label for="AadharCard">AadharCard</label>
+                          <input id="aadharCard" type="file" name="aadharCard" accept="application/pdf" class="form-control" placeholder="AadharCard" aria-label="AadharCard" aria-required="true">
+                        </div>
+                        <!-- <div class="col">
+                            <label for="PanCard">PanCard</label>
+                          <input id="panCard" type="file" name="panCard" accept="application/pdf" class="form-control" placeholder="panCard" aria-label="panCard" aria-required="true">
+                        </div> -->
+                    </div>
+                    <div class="row g-3">
+                        <div class="col">
+                            <label for="Date-of-birth">Date-of-birth</label>
+                          <input id="dateOfBirth" type="date" class="form-control" placeholder="dob" aria-label="date" aria-placeholder="date-of-birth">
+                        </div>
+                        <div class="col">
+                            <label for="city">Registration</label>
+                          <input id="registrationofRoomRent" type="date" class="form-control"  placeholder="Registration-of-date" aria-label="Registration-of-date">
+                        </div>
+                    </div>
+                     <div class="row g-3">
+                        <p>Residental Address</p>
+                        <div class="col">
+                            <label for="street">street</label>
+                          <input id="Residentalstreet" type="text" name="street"  class="form-control" placeholder="street" aria-label="AadharCard" aria-required="true">
+                        </div>
+                        <div class="col">
+                            <label for="city">city</label>
+                          <input id="Residentalcity" type="text" name="city"  class="form-control" placeholder="city" aria-label="panCard" aria-required="true">
+                        </div>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col">
+                            <label for="state">state</label>
+                          <input id="Residentalstate" type="text" name="state" class="form-control" placeholder="state" aria-label="state" aria-placeholder="state">
+                        </div>
+                        <div class="col">
+                            <label for="country">country</label>
+                          <input id="Residentalcountry" type="text" name="country" class="form-control"  placeholder="country" aria-label="country">
+                        </div>
+                        <div class="col">
+                            <label for="postalCode">postalCode</label>
+                          <input id="ResidentalzipCode" type="text" class="form-control" name="pincode"  placeholder="postalCode" aria-label="postalCode">
+                        </div>
+                    </div>
+                    <div class="form-check">
+                    <input class="form-check-input" name="formcheckinput" type="checkbox" onclick="formSubmit(this.form)" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Same Address
+                    </label>
+                    </div>
+                      <div class="row g-3">
+                        <p>currentAddress</p>
+                        <div class="col">
+                            <label for="street">street</label>
+                          <input id="Currentstreet" type="text" name="currentstreet"  class="form-control" placeholder="street" aria-label="AadharCard" aria-required="true">
+                        </div>
+                        <div class="col">
+                            <label for="city">city</label>
+                          <input id="Currentcity" type="text" name="currentcity"  class="form-control" placeholder="city" aria-label="panCard" aria-required="true">
+                        </div>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col">
+                            <label for="state">state</label>
+                          <input id="Currentstate" type="text" name="currentstate" class="form-control" placeholder="state" aria-label="state" aria-placeholder="state">
+                        </div>
+                        <div class="col">
+                            <label for="country">country</label>
+                          <input id="Currentcountry" type="text" name="currentcountry" class="form-control"  placeholder="country" aria-label="country">
+                        </div>
+                        <div class="col">
+                            <label for="postalCode">postalCode</label>
+                          <input id="CurrentzipCode"  type="text" name="currentpincode" class="form-control"  placeholder="postalCode" aria-label="postalCode">
+                        </div>
+                    </div
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Add-Details</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div> 
     <!-- /.page-wrapper -->
     <div class="mobile-nav__wrapper">
         <div class="mobile-nav__overlay mobile-nav__toggler"></div>
@@ -299,6 +395,25 @@
     <script src="assets/vendors/circleType/jquery.lettering.min.js"></script>
     <!-- template js -->
     <script src="assets/js/aports.js"></script>
+ <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
 <script>
@@ -364,4 +479,81 @@
          profilesection.append(box)
     }
     displayProfile(profile)
+    //user's adding own profile
+       document.getElementById("my-form").addEventListener("submit", AddUser);
+async function AddUser(e) {
+    e.preventDefault();
+    let firstName = document.getElementById("firstName").value;
+    let lastName = document.getElementById("lastName").value;
+    let email = document.getElementById("email").value;
+    let phone = document.getElementById("phone").value;
+    let aadharCard = document.getElementById("aadharCard").files[0];
+    let panCard = document.getElementById("panCard").files[0];
+    let residentalAddress = {
+        street: document.getElementById("Residentalstreet").value,
+        city: document.getElementById("Residentalcity").value,
+        state: document.getElementById("Residentalstate").value,
+        country: document.getElementById("Residentalcountry").value,
+        zipCode: document.getElementById("ResidentalzipCode").value
+    };
+    let currentAddress = {
+        street: document.querySelector("#Currentstreet").value,
+        city: document.querySelector("#Currentcity").value,
+        state: document.querySelector("#Currentstate").value,
+        country: document.querySelector("#Currentcountry").value,
+        zipCode: document.querySelector("#CurrentzipCode").value
+    };
+    let formData = new FormData();
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("aadharCard", aadharCard);
+    formData.append("panCard", panCard);
+    formData.append("residentalAddress[street]", residentalAddress.street);
+    formData.append("residentalAddress[city]", residentalAddress.city);
+    formData.append("residentalAddress[state]", residentalAddress.state);
+    formData.append("residentalAddress[country]", residentalAddress.country);
+    formData.append("residentalAddress[zipCode]", residentalAddress.zipCode);
+
+    formData.append("currentAddress[street]", currentAddress.street);
+    formData.append("currentAddress[city]", currentAddress.city);
+    formData.append("currentAddress[state]", currentAddress.state);
+    formData.append("currentAddress[country]", currentAddress.country);
+    formData.append("currentAddress[zipCode]", currentAddress.zipCode);
+    try {
+       const res = await fetch("http://localhost:8080/tentants/create",{
+        method:"POST",
+        headers:{
+             Authorization:`Bearer ${token.token}`,
+             "Content-Type":"application/json"
+        },
+        body:formData
+       });
+       const data = await res.json();
+       console.log(data)
+        if(data.message === "User already exists"){
+           alert(data.message)
+        }else {
+            alert(data.msg)
+        }
+    } catch (e) {
+        alert(e.message);
+    }
+}
+function formSubmit(f){
+    if(f.formcheckinput.checked === true){
+        f.currentstreet.value =f.street.value;
+        f.currentcity.value =f.city.value;
+        f.currentstate.value =f.state.value;
+        f.currentcountry.value =f.country.value;
+        f.currentpincode.value =f.pincode.value;
+    }else{
+        f.currentstreet.value ="";
+        f.currentcity.value ="";
+        f.currentstate.value ="";
+        f.currentcountry.value ="";
+        f.currentpincode.value ="";
+    }
+}
 </script>
