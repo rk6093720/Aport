@@ -399,7 +399,7 @@
     var token = JSON.parse(localStorage.getItem("token"));
      console.log(token.token)
        async function getApartmentDetails() {
-        let data = await fetch("http://localhost:8080/apartment/read",{
+        let data = await fetch("http://localhost:8080/apartment/read/user",{
                method:"GET",
                headers:{
                 Authorization:`Bearer ${token.token}`,
@@ -584,7 +584,7 @@
                 }
                    async function getTentant() {
                 try {
-                    const res = await fetch("http://localhost:8080/tentants/read",{
+                    const res = await fetch("http://localhost:8080/tentants/read/user",{
                         method:"GET",
                         headers:{
                              Authorization:`Bearer ${token.token}`,

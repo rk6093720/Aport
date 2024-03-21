@@ -525,7 +525,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // apartment details read
     let apartmentData;
     async function getApartmentDetails(){
-        let data= await fetch("http://localhost:8080/apartment/read",{
+        let data= await fetch("http://localhost:8080/apartment/read/user",{
             method:"GET",
             headers:{
                 Authorization:`Bearer ${token.token}`,
