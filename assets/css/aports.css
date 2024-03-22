@@ -602,7 +602,9 @@ ul {
 .main-menu__main-menu-box {
   position: relative;
   display: block;
-  color: black;
+  right: 40%;
+  text-decoration: none;
+  border: 1px solid red;
 }
 
 .main-menu__right {
