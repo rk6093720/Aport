@@ -604,7 +604,7 @@ ul {
   display: block;
   right: 40%;
   text-decoration: none;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 .main-menu__right {
