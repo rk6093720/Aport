@@ -80,9 +80,10 @@
                                 <li >
                                     <a href="contact.html">Contact</a>
                                 </li>
-                                 <!-- <li >
-                                    <a href="Blog.html">Blog</a>
-                                </li> -->
+                                <li>
+                                    <div class="sessionexpire"></div>
+                                </li>
+                                </li>
                                   <li><a  href="./signup.html">SignUp</a></li>
                                   <li><a  href="./login.html">Login</a></li>
                             </ul>
@@ -574,24 +575,26 @@ document.addEventListener("DOMContentLoaded", function () {
         })
     }
 function tokenExpire(expire) {
+   const token = new Date(expire);
+const interval = setInterval(() => {
     const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
-    const expirationTimeSeconds = expire - currentTime; // Convert to seconds
-    // Calculate hours, minutes, and seconds
-    const hours = Math.floor(expirationTimeSeconds / 3600);
-    const remainingSeconds = expirationTimeSeconds % 3600;
-    const minutes = Math.floor(remainingSeconds / 60);
-    const seconds = remainingSeconds % 60;
-    console.log(hours,minutes,seconds)
-    // Format the expiration time
-    const formattedExpirationTime = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-    
-    console.log(formattedExpirationTime);
-    if(hours <= 0 && minutes <= 0 && seconds <= 0){
-        alert("token is expire")
-        document.querySelector(".btn.btn-danger").addEventListener("click",
-        setTimeout(()=>{
-         logout()
-        },1000) );
+    const difference = (token - currentTime) ; // Difference in seconds
+    if (difference <= 0) {
+        clearInterval(interval);
+        document.querySelector(".sessionexpire").innerText = "Token expired";
+           setTimeout(()=>{
+            window.location.href="./login.html";
+           },5000)
+        return;
     }
+    const hours = Math.floor(difference / 3600);
+    const minutes = Math.floor((difference % 3600) / 60);
+    const seconds = Math.floor(difference % 60);
+    // Format the expiration time
+    document.querySelector(".sessionexpire").innerText =`${hours < 10 ? "0" + hours : hours}:${minutes < 10 ? "0" + minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+}, 1000);
+
+    // Calculate hours, minutes, and seconds
 }
+
 </script>

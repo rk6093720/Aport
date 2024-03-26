@@ -70,18 +70,21 @@
                         <a href="#" class="mobile-nav__toggler"><i class="fa fa-bars"></i></a>
                         <ul class="main-menu__list">
                             <li class="current" class="dropdown" >
-                                <a href="index.html">Home </a>
+                                <a href="./index.html">Home </a>
                             </li>
                             <li class="current" class="dropdown" >
                                 <a href="#">Appartments</a>
                                 <ul class="shadow-box">
-                                    <li><a href="apartments.html">Apartments</a></li>
-                                    <li><a href="apartment-details.html">Apartment Details</a></li>
+                                    <li><a href="./apartments.html">Apartments</a></li>
+                                    <li><a href="./apartment-details.html">Apartment Details</a></li>
                                 </ul>
                             </li>
                             <li class="current">
-                                <a href="contact.html">Contact</a>
+                                <a href="./contact.html">Contact</a>
                             </li>
+                             <li class="current">
+                                    <div class="sessionexpire"></div>
+                                </li>
                         </ul>
                     </div>
                     <!-- <div class="main-menu__right">
@@ -356,7 +359,10 @@
 </html>
 <script>
     var token = JSON.parse(localStorage.getItem("token"));
-    console.log(token.token);
+      if (token && token.token) {
+        var expire = token.expire;
+        tokenExpire(expire);
+    }
     let apartmentData;
     const base = "http://localhost:8080/";
     let apartment = document.querySelector(".apartments-two__single");
@@ -555,6 +561,28 @@ async  function search(e){
   }catch(err){
     console.log(err.message)
   }
+}
+function tokenExpire(expire) {
+   const token = new Date(expire);
+const interval = setInterval(() => {
+    const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
+    const difference = (token - currentTime) ; // Difference in seconds
+    if (difference <= 0) {
+        clearInterval(interval);
+        document.querySelector(".sessionexpire").innerText = "Token expired";
+           setTimeout(()=>{
+            window.location.href="./login.html";
+           },5000)
+        return;
+    }
+    const hours = Math.floor(difference / 3600);
+    const minutes = Math.floor((difference % 3600) / 60);
+    const seconds = Math.floor(difference % 60);
+    // Format the expiration time
+    document.querySelector(".sessionexpire").innerText =`${hours < 10 ? "0" + hours : hours}:${minutes < 10 ? "0" + minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+}, 1000);
+
+    // Calculate hours, minutes, and seconds
 }
 
 </script>

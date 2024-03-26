@@ -598,11 +598,13 @@ ul {
   padding: 30.5px 60px;
   margin-top: -40px;
 }
+.sessionexpire{
 
+}
 .main-menu__main-menu-box {
   position: relative;
   display: block;
-  right: 40%;
+  right: 30%;
   text-decoration: none;
   /* border: 1px solid red; */
 }
@@ -745,6 +747,7 @@ ul {
 .stricky-header .main-menu__list>li.current>a,
 .stricky-header .main-menu__list>li:hover>a {
   color: var(--aports-base);
+  text-decoration: none;
 }
 
 .main-menu .main-menu__list>li>ul,

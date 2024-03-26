@@ -49,6 +49,9 @@
     <div class="preloader">
         <div class="preloader__image"></div>
     </div>
+     <div class="stricky-header stricked-menu main-menu">
+            <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+        </div><!-- /.stricky-header -->
     <!-- /.preloader -->
     <div class="page-wrapper">
        <header class="main-header">
@@ -64,37 +67,28 @@
                         <a href="#" class="mobile-nav__toggler"><i class="fa fa-bars"></i></a>
                         <ul class="main-menu__list">
                             <li class="current" class="dropdown" >
-                                <a href="index.html">Home </a>
+                                <a href="./index.html">Home </a>
                             </li>
                             <li class="current" class="dropdown" >
                                 <a href="#">Appartments</a>
                                 <ul class="shadow-box">
-                                    <li><a href="apartments.html">Apartments</a></li>
-                                    <li><a href="apartment-details.html">Apartment Details</a></li>
+                                    <li><a href="./apartments.html">Apartments</a></li>
+                                    <li><a href="./apartment-details.html">Apartment Details</a></li>
                                 </ul>
                             </li>
                             <li class="current">
                                 <a href="./contact.html">Contact</a>
                             </li>
+                            <li class="current">
+                                <div class="sessionexpire"></div>
+                            </li>
                         </ul>
                     </div>
-                    <!-- <div class="main-menu__right">
-                        <div class="main-menu__search-btn-box">
-                            <div class="main-menu__search-box">
-                                <a href="#" class="main-menu__search search-toggler icon-magnifying-glass"></a>
-                            </div>
-                            <div class="main-menu__btn-box">
-                                <a href="contact.html" class="thm-btn main-menu__btn">Schedule a Visit</a>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </nav>
        </header> 
-         <div class="stricky-header stricked-menu main-menu">
-            <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
-        </div><!-- /.stricky-header -->
+        
         <!--Page Header Start-->
         <section class="page-header">
             <div class="page-header-bg" style="background-image: url(https://images.pexels.com/photos/6969987/pexels-photo-6969987.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500)">
@@ -362,7 +356,10 @@
     btn.classList.add("btn","btn-danger")
     let details;
     var token = JSON.parse(localStorage.getItem("token"));
-     console.log(token.token)
+      if (token && token.token) {
+        var expire = token.expire;
+        tokenExpire(expire);
+    }
        async function getApartmentDetails() {
         let data = await fetch("http://localhost:8080/apartment/read/user",{
                method:"GET",
@@ -448,6 +445,7 @@
                         contract: "pending",
                         apartmentId: apartmentId
                     }
+                    console.log(requestId)
                 const res = await fetch("http://localhost:8080/tentants/notification", {
                         method: "POST",
                         headers: {
@@ -623,7 +621,28 @@ async function downloadPdf() {
         alert(`Error: ${error.message}`);
     }
 }
+function tokenExpire(expire) {
+   const token = new Date(expire);
+const interval = setInterval(() => {
+    const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
+    const difference = (token - currentTime) ; // Difference in seconds
+    if (difference <= 0) {
+        clearInterval(interval);
+        document.querySelector(".sessionexpire").innerText = "Token expired";
+           setTimeout(()=>{
+            window.location.href="./login.html";
+           },5000)
+        return;
+    }
+    const hours = Math.floor(difference / 3600);
+    const minutes = Math.floor((difference % 3600) / 60);
+    const seconds = Math.floor(difference % 60);
+    // Format the expiration time
+    document.querySelector(".sessionexpire").innerText =`${hours < 10 ? "0" + hours : hours}:${minutes < 10 ? "0" + minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+}, 1000);
 
+    // Calculate hours, minutes, and seconds
+}
 
 window.onload = load();
 </script>
