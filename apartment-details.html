@@ -440,12 +440,12 @@
             btn.addEventListener("click", async function () {
                  try { 
                 const requestId = await getTentant();
+                 console.log("token",requestId)
                  const payload = {
-                        tentantsId: requestId._id,
+                        tentantsId:requestId._id,
                         contract: "pending",
                         apartmentId: apartmentId
                     }
-                    console.log(requestId)
                 const res = await fetch("http://localhost:8080/tentants/notification", {
                         method: "POST",
                         headers: {
@@ -545,7 +545,7 @@
                 })
                 contentBox.appendChild(cart)
                 }
-                   async function getTentant() {
+                 async function getTentant() {
                 try {
                     const res = await fetch("http://localhost:8080/tentants/read/user",{
                         method:"GET",
@@ -555,7 +555,8 @@
                         }
                     });
                     const data = await res.json();
-                    let id = data.Tentant.find((item) => (item._id))
+                    let id = data.Tentant.find((item) => (item.email === token.email))
+                    console.log("tentants",id,"token",token.email);        
                     return id;
                 } catch (e) {
                     alert(e.msg)
