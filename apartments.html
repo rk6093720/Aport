@@ -569,7 +569,8 @@ const interval = setInterval(() => {
     const difference = (token - currentTime) ; // Difference in seconds
     if (difference <= 0) {
         clearInterval(interval);
-        document.querySelector(".sessionexpire").innerText = "Token expired";
+        document.querySelector(".sessionexpire").innerText = "Session expire";
+        localStorage.removeItem("token");
            setTimeout(()=>{
             window.location.href="./login.html";
            },5000)

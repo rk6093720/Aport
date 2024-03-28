@@ -583,6 +583,7 @@ const interval = setInterval(() => {
         clearInterval(interval);
         document.querySelector(".sessionexpire").innerText = "Token expired";
            setTimeout(()=>{
+            localStorage.removeItem("token");
             window.location.href="./login.html";
            },5000)
         return;
