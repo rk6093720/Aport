@@ -479,7 +479,7 @@
 <script>
 var token = JSON.parse(localStorage.getItem("token"));
   if (token && token.token) {
-        var expire = token.expire;
+        var expire = token.expiresIn;
         tokenExpire(expire);
     }
 let logindiv = document.querySelector(".login-div");

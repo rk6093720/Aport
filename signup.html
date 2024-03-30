@@ -336,7 +336,7 @@
     }
      userData.push(signupData);
     localStorage.setItem("UserData",JSON.stringify(userData));
-      await axios.post(`http://localhost:8080/admin/owner-signup`,signupData,{
+      await axios.post(`http://localhost:8080/admin/signup`,signupData,{
       Headers: {
         'Content-Type': 'application/json'
       }
